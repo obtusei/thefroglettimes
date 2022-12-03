@@ -1,0 +1,6 @@
+{
+  "logo": "the froglet times",
+  "login":"Login",
+  "register":"Register",
+  "variable-example": "Using a variable {{count}}"
+}

@@ -10,7 +10,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-    <div>
+    <div className='grid grid-cols-3'>
+     <div className='bg-red-400 col-span-2'>
+      BREAKING NEWS
+     </div>
+     <div className='bg-yellow-200'>
+      asdsaasdasd
+     </div>
+     <div className='bg-green-200 col-span-3'>
+      asdsaasdasd
+     </div>
+     
      
     </div>
 
