@@ -14,6 +14,8 @@ function Navbar({changeColor,colorModeIcon}: Props) {
   const { t, lang } = useTranslation('common')
   return (
     <div>
+      <div className=''>
+      </div>
       <div className='flex justify-between items-center p-5'>
         <div className='flex items-center space-x-3'>
           <button onClick={() => setShowMenu(true)}><HamMenu/></button>
