@@ -5,10 +5,9 @@ type Props = {}
 function Footer({}: Props) {
   return (
     <div className='text-center p-5'>
-      <div>
+      <div className=' border-t-2 border-t-gray-400 border-b-2 border-gray-400'>
         <h1 className='font-logo text-lg py-2'>the <br/> froglet times</h1>
       </div>
-      <hr className='border-black'/><br />
       <div className='flex justify-between py-5 text-left'>
       <div>
         <ul>
