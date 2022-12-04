@@ -1,8 +1,11 @@
 import React, { ReactNode, useState } from 'react'
-import { CloseIcon, HamMenu, SunIcon } from './Icons'
+import { CloseIcon, HamMenu, SearchIcon, SunIcon } from './Icons'
 import useTranslation from 'next-translate/useTranslation'
 import Dropdown from './Dropdown'
 import regions from '../libs/regions'
+import categories from "../libs/categories.json"
+import Link from 'next/link'
+
 type Props = {
   changeColor: () => void,
   colorModeIcon:ReactNode
@@ -11,6 +14,8 @@ type Props = {
 function Navbar({changeColor,colorModeIcon}: Props) {
   const date = new Date()
   const [showMenu,setShowMenu] = useState(false)
+  const [openSearchBar,setSearchBar] = useState(false)
+
   const { t, lang } = useTranslation('common')
   return (
     <div>
@@ -24,29 +29,24 @@ function Navbar({changeColor,colorModeIcon}: Props) {
             <Dropdown title='REGION' items={regions}/>
           </div>
         </div>
-        <h1 className='text-center text-3xl font-logo'>the <br /> froglet times</h1>
+        <h1 className='text-center text-sm sm:text-2xl md:text-3xl font-logo'>the <br className='hidden md:block'/> froglet times</h1>
         <div className='flex space-x-6'>
           <div className='hidden md:flex items-center space-x-6'>  
+          <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
           <Dropdown title='EN' items={[{title:"EN",action:() => alert("asds")},{title:"NE",action:() => alert("asds")}]}/>
           <button onClick={changeColor}>{colorModeIcon}</button>
-          <button>Register</button>
           </div>
-          <button>Login</button>
+          <button className='border-2 border-black px-4 dark:border-white hover:dark:bg-white hover:dark:text-black hover:bg-black hover:text-white'>Login</button>
         </div>   
       </div>
       <hr className='border-t-gray-400 mx-5'/>
       <div className='hidden md:block p-2'>
-        <ul className='flex space-x-4 justify-center items-center'>
-          <li>Politics</li>
-          <li>Science</li>
-          <li>Music</li>
-          <li>Culture</li>
-          <li>Sports</li>
-          <li>Food</li>
-          <li>Travel</li>
-          <li>Arts</li>
-          <li>Health</li>
-          <li>Style</li>
+        <ul className='flex flex-wrap space-x-4 justify-center items-center'>
+          {
+            categories.map((cat,index) => (
+              <li key={index} className="hover:text-green-700"><Link href={cat.href}>{cat.title}</Link></li>
+            ))
+          }
         </ul>
       </div>
       <hr className='border-t-gray-400  mx-5'/>
@@ -62,16 +62,11 @@ function Navbar({changeColor,colorModeIcon}: Props) {
         </div>
         <div>
           <ul>
-            <li>Politics</li>
-            <li>Science</li>
-            <li>Music</li>
-            <li>Culture</li>
-            <li>Sports</li>
-            <li>Food</li>
-            <li>Travel</li>
-            <li>Arts</li>
-            <li>Health</li>
-            <li>Style</li>
+            {
+              categories.map((cat,index) => (
+                <li key={index} className="hover:text-green-700"><Link href={cat.href}>{cat.title}</Link></li>
+              ))
+            }
           </ul>
         </div>
       </div>
