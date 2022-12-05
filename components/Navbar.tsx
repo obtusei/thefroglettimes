@@ -29,7 +29,7 @@ function Navbar({changeColor,colorModeIcon}: Props) {
             <Dropdown title='REGION' items={regions}/>
           </div>
         </div>
-        <h1 className='text-center text-sm sm:text-2xl md:text-3xl font-logo'>the <br className='hidden md:block'/> froglet times</h1>
+        <h1 className='text-center tracking-widest text-sm sm:text-2xl md:text-4xl font-logo'>The Froglet Times</h1>
         <div className='flex space-x-6'>
           <div className='hidden md:flex items-center space-x-6'>  
           <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
@@ -50,7 +50,7 @@ function Navbar({changeColor,colorModeIcon}: Props) {
         </ul>
       </div>
       <hr className='border-t-gray-400  mx-5'/>
-      <div className='p-2 py-4 text-center flex justify-center space-x-4'>
+      <div className='p-2 py-4 text-center flex justify-center items-center space-x-4'>
         <span className='text-red-600 font-bold text-xs'>LIVE</span>
         <p>Columbia vs Brazil</p>
       </div>

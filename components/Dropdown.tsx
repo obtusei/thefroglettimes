@@ -10,7 +10,7 @@ function Dropdown({title,items}: Props) {
   return (
     <div>
       
-  <button id="dropdownDefault" onClick={() => openMenu(!menu)} data-dropdown-toggle="dropdown" className="text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">
+  <button id="dropdownDefault" onClick={() => openMenu(!menu)} data-dropdown-toggle="dropdown" className="px-4 py-2.5 text-center inline-flex items-center" type="button">
     {title}
     <svg className="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
@@ -21,7 +21,7 @@ function Dropdown({title,items}: Props) {
         {
           items.map((item,index) => (
             <li key={index}>
-              <button onClick={item} className="block py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{item.title}</button>
+              <button onClick={() => {item.handle();openMenu(false)}} className="block py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{item.title}</button>
             </li>
           ))
         }

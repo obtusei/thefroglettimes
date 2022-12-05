@@ -26,7 +26,7 @@ function Layout({children}: Props) {
     };
   }, [handleKeyPress])
   return (
-    <div className={`${isDark && "dark"}`}>
+    <div className={`${isDark && "dark"} font-serif`}>
       <div className=' dark:bg-gray-700 dark:text-white'>
       <Navbar changeColor={() => setDark(!isDark)} colorModeIcon={!isDark ? <SunIcon/>:<MoonIcon/>}/>
       {children}

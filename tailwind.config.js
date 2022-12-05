@@ -8,8 +8,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        sans:['Courier'],
-        "logo":['Vast Shadow', 'cursive']
+        serif:['Abhaya Libre'],
+        title:['Della Respira','serif'],
+        body:['Abhaya Libre','serif'],
+        tag:['EB Garamond','serif'],
+        logo:['San-de-More','serif'],
+        // logo:['Vast Shadow', 'cursive']
       }
     },
   },
