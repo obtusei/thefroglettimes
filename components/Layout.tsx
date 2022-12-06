@@ -11,7 +11,7 @@ function Layout({children}: Props) {
   const [isDark,setDark]= useState(false)
   const handleKeyPress = useCallback(
     (event:  globalThis.KeyboardEvent) => {
-      if (event.metaKey === true && event.key === "j") {
+      if ((event.metaKey === true || event.ctrlKey === true) && event.key === "j") {
         setDark(!isDark);
       }
     },

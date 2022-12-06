@@ -29,7 +29,7 @@ function Navbar({changeColor,colorModeIcon}: Props) {
             <Dropdown title='REGION' items={regions}/>
           </div>
         </div>
-        <h1 className='text-center tracking-widest text-sm sm:text-2xl md:text-4xl font-logo'>The Froglet Times</h1>
+        <h1 className='text-center tracking-widest text-sm sm:text-2xl md:text-4xl font-logo'><Link href={"/"}>The Froglet Times</Link></h1>
         <div className='flex space-x-6'>
           <div className='hidden md:flex items-center space-x-6'>  
           <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
