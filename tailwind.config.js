@@ -12,7 +12,7 @@ module.exports = {
         title:['Della Respira','serif'],
         body:['Abhaya Libre','serif'],
         tag:['EB Garamond','serif'],
-        logo:['San-de-More','serif'],
+        logo:['Chomsky','serif'],
         // logo:['Vast Shadow', 'cursive']
       }
     },

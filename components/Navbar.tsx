@@ -18,7 +18,7 @@ function Navbar({changeColor,colorModeIcon}: Props) {
 
   const { t, lang } = useTranslation('common')
   return (
-    <div>
+    <div className=''>
       <div className=''>
       </div>
       <div className='flex justify-between items-center p-5'>
@@ -29,7 +29,7 @@ function Navbar({changeColor,colorModeIcon}: Props) {
             <Dropdown title='REGION' items={regions}/>
           </div>
         </div>
-        <h1 className='text-center tracking-widest text-sm sm:text-2xl md:text-4xl font-logo'><Link href={"/"}>The Froglet Times</Link></h1>
+        <h1 className='text-center tracking-widest text-xl sm:text-2xl md:text-4xl font-logo'><Link href={"/"}>The Froglet Times</Link></h1>
         <div className='flex space-x-6'>
           <div className='hidden md:flex items-center space-x-6'>  
           <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
@@ -40,8 +40,8 @@ function Navbar({changeColor,colorModeIcon}: Props) {
         </div>   
       </div>
       <hr className='border-t-gray-400 mx-5'/>
-      <div className='hidden md:block p-2'>
-        <ul className='flex flex-wrap space-x-4 justify-center items-center'>
+      <div className='hidden md:block p-2 '>
+        <ul className='flex flex-wrap space-x-4 justify-center items-center '>
           {
             categories.map((cat,index) => (
               <li key={index} className="hover:text-green-700"><Link href={cat.href}>{cat.title}</Link></li>

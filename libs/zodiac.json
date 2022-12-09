@@ -1,0 +1,224 @@
+{
+    "en": [
+        {
+            "name":"Aries",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Aries_symbol_%28fixed_width%29.svg/320px-Aries_symbol_%28fixed_width%29.svg.png?1670582573104",
+            "unicode":"♈︎",
+            "date":"March 21 - April 19",
+            "today":"Try to get out of your office early and do things that you really enjoy."
+        },
+        {
+            "name":"Taurus",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Taurus_symbol_%28fixed_width%29.svg/320px-Taurus_symbol_%28fixed_width%29.svg.png",
+            "unicode":"♈︎",
+            "date":"April 20 - May 20",
+            "today":"A beneficial day to work on things that will improve your health."
+        },
+        {
+            "name":"Gemini",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Gemini_symbol_%28fixed_width%29.svg/320px-Gemini_symbol_%28fixed_width%29.svg.png",
+            "unicode":"♈︎",
+            "date":"May 21 - June 20",
+            "today":"Elders need to put their extra energy into positive use to reap good benefits."
+        },
+        {
+            "name":"Cancer",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Cancer_symbol_%28fixed_width%29.svg/320px-Cancer_symbol_%28fixed_width%29.svg.png",
+            "unicode":"♈︎",
+            "date":"June 21 - July 22",
+            "today":"No need to worry about you health today."
+        },
+        {
+            "name":"Leo",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Leo_symbol_%28fixed_width%29.svg/320px-Leo_symbol_%28fixed_width%29.svg.png",
+            "unicode":"♈︎",
+            "date":"July 23 - August 22",
+            "today":"Bring positive thoughts in your mind. A neighbor of yours may come to ask you for a loan today."
+        },
+        {
+            "name":"Virgo",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Virgo_symbol_%28fixed_width%29.svg/320px-Virgo_symbol_%28fixed_width%29.svg.png",
+            "unicode":"♈︎",
+            "date":"August 23 - September 22",
+            "today":"Take care of your well being otherwise things might take a turn for the worse."
+        },
+        {
+            "name":"Libra",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Libra_symbol_%28fixed_width%29.svg/320px-Libra_symbol_%28fixed_width%29.svg.png",
+            "unicode":"♈︎",
+            "date":"September 23 - October 22",
+            "today":"Take rest and try to relax as much as possible between work."
+        },
+        {
+            "name":"Scorpio",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Scorpius_symbol_%28fixed_width%29.svg/320px-Scorpius_symbol_%28fixed_width%29.svg.png",
+            
+            "unicode":"♈︎",
+            "date":"October 23 - November 21",
+            "today":"Take care of your well being otherwise things might take a turn for the worse."
+        },
+        { 
+            "name":"Sagittarius",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Sagittarius_symbol_%28fixed_width%29.svg/320px-Sagittarius_symbol_%28fixed_width%29.svg.png",
+            "unicode":"♈︎",
+            "date":"November 22 - December 21",
+            "today":"Take rest and try to relax as much as possible between work."
+        },
+        {
+            "name":"Capricorn",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Capricornus_symbol_%28fixed_width%29.svg/320px-Capricornus_symbol_%28fixed_width%29.svg.png?1670583163461",
+            "date":"December 22 - January 19",
+            "today":"You must take complete rest to recharge your body otherwise the fatigue could cause health issue."
+        },
+        {
+            "name":"Aquarius",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Aquarius_symbol_%28fixed_width%29.svg/320px-Aquarius_symbol_%28fixed_width%29.svg.png?1670583147264",
+            "unicode":"♈︎",
+            "date":"November 22 - December 21",
+            "today":"You may get rid from prolong illness. Today, you can spend a lot of money on a party with fr..."
+        },
+        {
+            "name":"Pisces",
+            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Pisces_symbol_%28fixed_width%29.svg/320px-Pisces_symbol_%28fixed_width%29.svg.png",
+            "unicode":"♈︎",
+            "date":"February 19 - March 20",
+            "today":"oday you will have ample of the time to do things to improve your health and looks."
+        }
+      ],
+    "ne": {
+        "Rat": {
+            "yin-yang": "Yang",
+            "direction": "North",
+            "season": "Mid-Winter",
+            "element": "Water",
+            "trine": "1st",
+            "years": [
+                1900, 1912, 1924, 1936, 1948, 1960, 1972, 1984, 1996, 2008, 2020, 2032
+            ],
+            "unicode_symbol": "子"
+        },
+        "Ox": {
+            "yin-yang": "Yin",
+            "direction": "North",
+            "season": "Late Winter",
+            "element": "Earth",
+            "trine": "2nd",
+            "years": [
+                1901, 1913, 1925, 1937, 1949, 1961, 1973, 1985, 1997, 2009, 2021, 2033
+            ],
+            "unicode_symbol": "丑"
+        },
+        "Tiger": {
+            "yin-yang": "Yang",
+            "direction": "East",
+            "season": "Early Spring",
+            "element": "Wood",
+            "trine": "3rd",
+            "years": [
+                1902, 1914, 1926, 1938, 1950, 1962, 1974, 1986, 1998, 2010, 2022, 2034
+            ],
+            "unicode_symbol": "寅"
+        },
+        "Rabbit": {
+            "yin-yang": "Yin",
+            "direction": "East",
+            "season": "Mid-Spring",
+            "element": "Wood",
+            "trine": "4th",
+            "years": [
+                1903, 1915, 1927, 1939, 1951, 1963, 1975, 1987, 1999, 2011, 2023, 2035
+            ],
+            "unicode_symbol": "卯"
+        },
+        "Dragon": {
+            "yin-yang": "Yang",
+            "direction": "East",
+            "season": "Late Spring",
+            "element": "Earth",
+            "trine": "1st",
+            "years": [
+                1904, 1916, 1928, 1940, 1952, 1964, 1976, 1988, 2000, 2012, 2024, 2036
+            ],
+            "unicode_symbol": "辰"
+        },
+        "Snake": {
+            "yin-yang": "Yin",
+            "direction": "South",
+            "season": "Early Summer",
+            "element": "Fire",
+            "trine": "2nd",
+            "years": [
+                1905, 1917, 1929, 1941, 1953, 1965, 1977, 1989, 2001, 2013, 2025, 2037
+            ],
+            "unicode_symbol": "巳"
+        },
+        "Horse": {
+            "yin-yang": "Yang",
+            "direction": "South",
+            "season": "Mid-Summer",
+            "element": "Fire",
+            "trine": "3rd",
+            "years": [
+                1906, 1918, 1930, 1942, 1954, 1966, 1978, 1990, 2002, 2014, 2026, 2038
+            ],
+            "unicode_symbol": "午"
+        },
+        "Goat": {
+            "yin-yang": "Yin",
+            "direction": "South",
+            "season": "Late Summer",
+            "element": "Earth",
+            "trine": "4th",
+            "years": [
+                1907, 1919, 1931, 1943, 1955, 1967, 1979, 1991, 2003, 2015, 2027, 2039
+            ],
+            "unicode_symbol": "未"
+        },
+        "Monkey": {
+            "yin-yang": "Yang",
+            "direction": "West",
+            "season": "Early Autumn",
+            "element": "Metal",
+            "trine": "1st",
+            "years": [
+                1908, 1920, 1932, 1944, 1956, 1968, 1980, 1992, 2004, 2016, 2028, 2040
+            ],
+            "unicode_symbol": "申"
+        },
+        "Rooster": {
+            "yin-yang": "Yin",
+            "direction": "West",
+            "season": "Mid-Autumn",
+            "element": "Metal",
+            "trine": "2nd",
+            "years": [
+                1909, 1921, 1933, 1945, 1957, 1969, 1981, 1993, 2005, 2017, 2029, 2041
+            ],
+            "unicode_symbol": "酉"
+        },
+        "Dog": {
+            "yin-yang": "Yang",
+            "direction": "West",
+            "season": "Late Autumn",
+            "element": "Earth",
+            "trine": "3rd",
+            "years": [
+                1910, 1922, 1934, 1946, 1958, 1970, 1982, 1994, 2006, 2018, 2030, 2042
+            ],
+            "unicode_symbol": "戌"
+        },
+        "Pig": {
+            "yin-yang": "Yin",
+            "direction": "North",
+            "season": "Early Winter",
+            "element": "Water",
+            "trine": "4th",
+            "years": [
+                1911, 1923, 1935, 1947, 1959, 1971, 1983, 1995, 2007, 2019, 2031, 2043
+            ],
+            "unicode_symbol": "亥"
+        }
+        
+    }
+    
+}
