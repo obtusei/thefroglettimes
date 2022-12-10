@@ -1,5 +1,9 @@
 const regions =  [
   {
+    title:"General",
+    action:() => alert("asds")
+  },
+  {
     title:"Province 1",
     action:() => alert("asds")
   },

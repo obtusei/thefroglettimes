@@ -1,12 +1,16 @@
 import Head from 'next/head'
 import Layout from '../components/Layout'
 import Image from "next/image"
-import news from "../libs/news.json"
-import { LeaderboardAd, ProductAd, WideSkyscrapersAd } from '../components/Ads'
+import ennews from "../libs/news.json"
+import nenews from "../libs/nenews.json"
+import { LeaderboardAd, ProductAd, RectangleAd, WideSkyscrapersAd } from '../components/Ads'
 import { NewsCard, NewsCardWithImageTop } from '../components/News/Card'
 import Link from 'next/link'
 import horoscope from "../libs/zodiac.json"
+import { useRouter } from 'next/router'
 export default function Home() {
+  const router = useRouter();
+  const news = router.locale == "en" ? ennews:nenews
   return (
     <Layout>
       <Head>
@@ -53,7 +57,7 @@ export default function Home() {
         <div className='grid grid-cols-3 md:grid-cols-1'>
           {
             news.map((content,index) => (
-              <div key={index} className="col-span-1 p-1">
+              <div key={index} className="col-span-3 sm:col-span-2 md:col-span-1 p-1">
                 <NewsCard 
                     title={content.title}
                     image={content.image}
@@ -67,7 +71,10 @@ export default function Home() {
               </div>
             ))
           }
-          <WideSkyscrapersAd/>
+          <div className='col-span-3 md:col-span-1'>
+            <div className='hidden md:block'><WideSkyscrapersAd/></div>
+            <div className='block md:hidden'><RectangleAd/></div>
+          </div>
           <br />
         </div>
      </div>
@@ -165,7 +172,7 @@ export default function Home() {
             
             {
               news.map((content,index)=> (
-                <div key={index} className='col-span-2'>
+                <div key={index} className='col-span-4 md:col-span-2'>
                   <NewsCard 
                     title={content.title}
                     description={content.description}

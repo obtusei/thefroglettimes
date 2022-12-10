@@ -8,11 +8,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
+        sans:['Helvetica','sans-serif'],
         serif:['Abhaya Libre'],
         title:['Della Respira','serif'],
         body:['Abhaya Libre','serif'],
         tag:['EB Garamond','serif'],
         logo:['Chomsky','serif'],
+        devlogo:[ 'Rozha One', 'serif'],
+        devtitle:['Biryani','serif'],
         // logo:['Vast Shadow', 'cursive']
       }
     },

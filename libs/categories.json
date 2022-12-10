@@ -1,75 +1,75 @@
 [
   {
     "title":"Politics",
-    "href":"/politics"
+    "href":"/section/politics"
   },
   {
     "title":"Economy",
-    "href":"/economy"
+    "href":"/section/economy"
   },
   {
     "title":"Business",
-    "href":"/business"
+    "href":"/section/business"
   },
   {
     "title":"Finance",
-    "href":"/finance"
+    "href":"/section/finance"
   },
   {
     "title":"Health",
-    "href":"/health"
+    "href":"/section/health"
   },
   {
     "title":"Sports",
-    "href":"/sports"
+    "href":"/section/sports"
   },
   {
     "title":"Travel",
-    "href":"/travel"
+    "href":"/section/travel"
   },
   {
     "title":"Entertainment",
-    "href":"/entertainment"
+    "href":"/section/entertainment"
   },
   {
     "title":"Food",
-    "href":"/food"
+    "href":"/section/food"
   },
   {
     "title":"Arts",
-    "href":"/arts"
+    "href":"/section/arts"
   },
   {
     "title":"Lifestyle",
-    "href":"/lifestyle"
+    "href":"/section/lifestyle"
   },
   {
     "title":"Opinions",
-    "href":"/opinions"
+    "href":"/section/opinions"
   },
   {
     "title":"Tech",
-    "href":"/tech"
+    "href":"/section/tech"
   },
   {
     "title":"Science",
-    "href":"/science"
+    "href":"/section/science"
   },
   {
     "title":"Culture",
-    "href":"/culture"
+    "href":"/section/culture"
   },
   {
     "title":"Books",
-    "href":"/books"
+    "href":"/section/books"
   },
   {
     "title":"Letters",
-    "href":"/letters"
+    "href":"/section/letters"
   },
   {
     "title":"Education",
-    "href":"/education"
+    "href":"/section/education"
   }
 
 ]

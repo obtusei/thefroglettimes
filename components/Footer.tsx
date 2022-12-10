@@ -6,10 +6,10 @@ function Footer({}: Props) {
   return (
     <div className='text-center p-5'>
       <div className=' border-t-2 border-t-gray-400 border-b-2 border-gray-400'>
-        <h1 className='font-logo text-lg py-2 uppercase'>the froglet times</h1>
+        <h1 className='font-logo text-3xl py-2'>The Froglet Times</h1>
       </div>
-      <div className='flex justify-between py-5 text-left'>
-      <div>
+      <div className='grid grid-cols-4 md:grid-cols-5 py-5 text-left'>
+      <div className='col-span-2 md:col-span-1 text-center md:text-left'>
         <ul>
           <li className='font-bold'>News</li>
           <li>Home Page</li>
@@ -20,42 +20,45 @@ function Footer({}: Props) {
           <li>Lifestyle</li>
         </ul>
       </div>
-      <div>
+      <div className='col-span-2 md:col-span-1 text-center md:text-left'>
         <ul>
+          <li className='font-bold'>News</li>
           <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
+          <li>Breaking News</li>
+          <li>Food</li>
+          <li>Finance</li>
+          <li>Health</li>
+          <li>Lifestyle</li>
         </ul>
       </div>
-      <div>
+      <div className='col-span-2 md:col-span-1 text-center md:text-left'>
         <ul>
+          <li className='font-bold'>News</li>
           <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
+          <li>Breaking News</li>
+          <li>Food</li>
+          <li>Finance</li>
+          <li>Health</li>
+          <li>Lifestyle</li>
         </ul>
       </div>
-      <div>
+      <div className='col-span-2 md:col-span-1 text-center md:text-left'>
         <ul>
+          <li className='font-bold'>News</li>
           <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
-          <li>Home Page</li>
+          <li>Breaking News</li>
+          <li>Food</li>
+          <li>Finance</li>
+          <li>Health</li>
+          <li>Lifestyle</li>
         </ul>
       </div>
-      <div className='flex flex-col'>
+      <div className='col-span-5 mt-4 md:mt-0 md:col-span-1'>
+        <div className='flex flex-col'>
         Subscribe to our newsletter
-        <input type="email" name="" id="" />
+        <input type="email" name="" id="" placeholder='Email Address' className='search' />
+        <button className='btn mt-2'>Subscribe</button>
+      </div>
       </div>
     </div>
     <hr className='border-black'/>
