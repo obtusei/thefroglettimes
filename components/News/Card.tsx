@@ -21,7 +21,7 @@ export function NewsCard({title,description,image,imageSize,author,readTime,size
   const router = useRouter();
   return (
     <div className={`flex flex-col ${reverse ? "md:flex-row-reverse":"md:flex-row"} md:space-x-3`}>
-      {image && <Image src={image} width={imageSize ? imageSize:300} height={10} style={{objectFit:"cover"}} alt="sadsa"/>}
+      {image && <Image src={image} width={imageSize ? imageSize:300} height={20} className='object-scale-down' alt="sadsa"/>}
         <div className='py-2'>
           {
             category && <p className='text-green-700'>{category}</p>

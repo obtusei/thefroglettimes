@@ -1,8 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
-export const LeaderboardAd = () => {
+export const LeaderboardAd = ({m}:{m?:boolean}) => {
   return (
-    <div className='bg-yellow-500 h-24 m-4 flex items-center justify-center text-3xl text-white'>ADS</div>
+    <div className={`bg-yellow-500 h-24 ${!m && "m-4"} flex items-center justify-center text-3xl text-white`}>ADS</div>
   )
 }
 

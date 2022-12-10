@@ -23,7 +23,7 @@ export default function Home() {
      <div className='md:border-r-2 border-r-gray-300 px-2 col-span-3 md:col-span-2'>
       <h3 className='text-2xl font-bold'>BREAKING NEWS</h3>
       <div className='grid grid-cols-3'>
-        <div className='col-span-3 md:col-span-1'>
+        <div className='col-span-3 md:col-span-1 md:border-b-2 md:border-r-2 md:border-gray-300 md:mr-2 h-full'>
           {
             news.map((content,index) => (
               <div key={index} className='p-2'>
@@ -34,23 +34,34 @@ export default function Home() {
                     readTime={'9 mins'}
                     publishedAt={content.published_at}
                     />
-                <hr/>
+                {
+                  news.length != index+1 && <hr/>
+                }
               </div>
             ))
           }
         </div>
+        
         <div className='col-span-3 md:col-span-2'>
           <Image src={"/img.webp"} width={800} height={200} alt="sadsa"/>
           <p className='font-bold'>This image content domestic violence happening in our society right now.</p>
           <hr/>
           <div className='py-2'>
             <h3 className='text-2xl font-bold font-title'>The Chinese Dream, Denied: Harsh Measures Shake Beijing’s Social Contract</h3>
-            <p className='text-gray-500 line-clamp-5'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!</p>
+            <p className='text-gray-500 line-clamp-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias! Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
+            
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!</p>
             <p className='text-sm text-gray-500'>9 MIN READ • By Simon Thapa</p>
           </div>
         </div>
+        <div className='col-span-3 py-2'>
+          <LeaderboardAd m/>
+        </div>
       </div>
-        <hr />
      </div>
      <div className='p-2 col-span-3 md:col-span-1'>
       <h3 className='text-2xl font-bold'>{"TODAY'S HEADLINES"}</h3>
@@ -78,9 +89,8 @@ export default function Home() {
           <br />
         </div>
      </div>
-     <br />
   {/* ------------------------------- UpdatedNews ------------------------------ */}
-     <div className='col-span-3 border-t-2 border-b-2 border-gray-300'>
+     <div className='col-span-3 border-t-2 border-b-2 border-gray-300 h-full'>
       <div className='grid grid-cols-4 md:grid-cols-3 py-2 gap-2'>
         {
         [1,2,3].map((content,index) => (
@@ -100,17 +110,19 @@ export default function Home() {
      {/* ------------------------------- Third ------------------------------ */}
      <div className='col-span-3 md:col-span-1 md:border-r-2 border-gray-300 pr-2'>
       {/* <WideSkyscrapersAd/> */}
-      <div className='p-4'>
+      <div className='p-4 overflow-hidden'>
         <h3 className='text-2xl text-purple-700 dark:text-purple-400 pb-2 font-bold'>HOROSCOPE</h3>
-        <div className='space-y-4'>
+        <div className='flex overflow-scroll flex-row md:flex-col md:space-y-4'>
           {
           horoscope.en.map((zodiac) => (
-            <div key={zodiac.name} className="flex space-x-2">
+            <div key={zodiac.name} className="block">
+              <div className="flex space-x-2  w-80">
                 <Image src={zodiac.svg_symbol} width={14} height={24} className="w-10 h-10 p-2 bg-purple-300 rounded-full " alt={zodiac.name}/>
               <div>
                 <h4 className='text-xl font-bold'>{zodiac.name} <span className='text-sm'>({zodiac.date})</span></h4>
                 <p className='pr-4 text-gray-600 dark:text-gray-300'>{zodiac.today}</p>
               </div>
+            </div>
             </div>
           ))
         }

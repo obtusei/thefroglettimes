@@ -2,5 +2,8 @@
   "logo": "The Froglet Times",
   "login":"Login",
   "register":"Register",
-  "variable-example": "Using a variable {{count}}"
+  "variable-example": "Using a variable {{count}}",
+  "search":"Search news, article, section, journalist",
+  "searchHead":"Search",
+  "close":"Close"
 }

@@ -2,5 +2,7 @@
   "logo": "द फ्रोग्लेट टायमस्",
   "login":"लगइन",
   "register":"साइन अप",
-  "variable-example": "Using a variable {{count}}"
+  "variable-example": "Using a variable {{count}}",
+  "search":"समाचार, लेख, खण्ड, पत्रकार खोज्नुहोस्",
+  "searchHead":"खोज"
 }
