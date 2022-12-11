@@ -56,7 +56,7 @@ function Navbar({changeColor,colorModeIcon}: Props) {
             <h3 className='text-2xl'>#{t("searchHead")}</h3>
             <div className='text-center'>
               <input type="search" placeholder={t('search')} className='border-b-2 text-white focus:outline-none text-2xl w-full bg-transparent border-white p-2' />
-              <button className='text-white uppercase mt-4' onClick={() => setSearchBar(false)}>{t("close")}</button>
+              <button className='text-white uppercase mt-4' onClick={(e) => setSearchBar(false)}>{t("close")}</button>
             </div>
             </div>
           <div className='hidden md:flex items-center space-x-6'>  
