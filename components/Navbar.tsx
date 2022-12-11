@@ -8,9 +8,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 type Props = {
-  changeColor: () => void,
-  colorModeIcon:ReactNode
-}
+  changeColor: () => void;
+  colorModeIcon: ReactNode;
+};
 
 function Navbar({changeColor,colorModeIcon}: Props) {
   const date = new Date()
@@ -20,6 +20,9 @@ function Navbar({changeColor,colorModeIcon}: Props) {
   const router = useRouter();
   const { t, lang } = useTranslation('common')
   const searchButton = <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
+  const handleClick = (path: string) => {
+    router.push(path);
+  };
   const langDropDown = <Dropdown title={`${router.locale?.toUpperCase()}`}>
             {
               <ul className="py-1 text-gray-700 dark:text-gray-200">
@@ -64,8 +67,13 @@ function Navbar({changeColor,colorModeIcon}: Props) {
           {langDropDown}
           {colorModeSwitch}
           </div>
-          <button className='border-2 border-black px-4 dark:border-white hover:dark:bg-white hover:dark:text-black hover:bg-black hover:text-white'>Login</button>
-        </div>   
+          <button
+            onClick={() => handleClick("/login")}
+            className="border-2 border-black px-4 dark:border-white hover:dark:bg-white hover:dark:text-black hover:bg-black hover:text-white"
+          >
+            Login
+          </button>
+        </div>
       </div>
       <hr className='border-t-gray-400 mx-5'/>
       <div className='hidden md:block p-2 '>
@@ -104,7 +112,7 @@ function Navbar({changeColor,colorModeIcon}: Props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
