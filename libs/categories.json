@@ -1,6 +1,9 @@
 [
   {
     "title":"Politics",
+    "lang":{
+      "ne":"Raj"
+    },
     "href":"/section/politics"
   },
   {

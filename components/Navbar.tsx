@@ -42,7 +42,6 @@ function Navbar({changeColor,colorModeIcon}: Props) {
       <div className='flex justify-between items-center p-5'>
         <div className='flex items-center space-x-3'>
           <button onClick={() => setShowMenu(true)}><HamMenu/></button>
-          <div className='block md:hidden'>{langDropDown}</div>
           <div className='hidden md:flex items-center'>
             <p>{date.toDateString()}</p>
             {regionDropDown}
