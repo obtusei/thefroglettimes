@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
-export default function SignupForm() {
+export default function LoginForm() {
   return (
     <div className="flex justify-center items-center h-screen p-5 ">
       <div className="w-1/3 h-4/5 rounded-lg bg-gray-200 drop-shadow-lg">

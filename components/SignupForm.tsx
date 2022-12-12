@@ -8,7 +8,7 @@ export default function LoginForm() {
           <h6 className="text-center tracking-widest text-sm sm:text-sm md:text-m font-tag">
             Welcome to
           </h6>
-          <h5 className="text-center tracking-widest text-sm sm:text-m md:text-xl font-logo">
+          <h5 className="text-center tracking-widest text-sm sm:text-m md:text-4xl font-logo">
             The Froglet Times
           </h5>
         </div>

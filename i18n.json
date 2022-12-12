@@ -4,6 +4,8 @@
   "pages": {
     "*": ["common"],
     "/": ["home"],
+    "/login":["register"],
+    "/signup":["register"],
     "/cart": ["cart"],
     "/content/[slug]": ["content"],
     "rgx:^/account": ["account"]

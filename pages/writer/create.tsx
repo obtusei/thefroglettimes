@@ -1,5 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
+import Layout from '../../components/Layout'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {	
 	ssr: false,
@@ -48,9 +49,16 @@ type Props = {}
 
 function CreateNews({}: Props) {
   return (
-    <div>
-      <input type="text" placeholder='title' />
-      <select>
+    <div className='p-4'>
+      <div className='flex items-center justify-between'>
+        <input type="text" placeholder='Enter the title' />
+      <div className='space-x-2'>
+        <button>Cancel</button>
+        <button className='btn'>Publish</button>
+      </div>
+      </div>
+      <div>
+        <select>
         <option value="">Math</option>
       </select>
       <select>
@@ -59,8 +67,8 @@ function CreateNews({}: Props) {
       <select>
         <option value="">EN</option>
       </select>
-      <button>Cancel</button>
-      <button>Publish</button>
+      </div>
+      
       <QuillNoSSRWrapper 
         modules={modules} 
         formats={formats} 

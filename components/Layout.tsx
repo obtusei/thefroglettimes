@@ -5,10 +5,12 @@ import Navbar from './Navbar'
 
 type Props = {
   children:React.ReactNode,
-  bg?:string
+  bg?:string,
+  hideNav?:boolean,
+  hideFooter?:boolean
 }
 
-function Layout({children,bg}: Props) {
+function Layout({children,bg,hideNav,hideFooter}: Props) {
   const [isDark,setDark]= useState(false)
   const handleKeyPress = useCallback(
     (event:  globalThis.KeyboardEvent) => {
@@ -29,9 +31,13 @@ function Layout({children,bg}: Props) {
   return (
     <div className={`${isDark && "dark"} ${bg && bg} font-serif`}>
       <div className=' dark:bg-gray-700 dark:text-white'>
-      <Navbar changeColor={() => setDark(!isDark)} colorModeIcon={!isDark ? <SunIcon/>:<MoonIcon/>}/>
+      {
+        hideNav ? <></>:<Navbar changeColor={() => setDark(!isDark)} colorModeIcon={!isDark ? <SunIcon/>:<MoonIcon/>}/>
+      }
       {children}
-      <Footer/>
+      {
+        hideFooter ? <></>:<Footer/>
+      }
     </div>
     </div>
   )

@@ -1,0 +1,18 @@
+{
+  "logo":"The Froglet Times",
+  "login":"Login",
+  "email":"Email:",
+  "password":"Password:",
+  "loginButton":"Log In",
+  "notAMember":"Not a member?",
+  "alreadyHaveAccount":"Already have an account?",
+  "fullName":"Full Name:",
+  "lastName":"Last Name:",
+  "username":"Username:",
+  "loginError":"Wrong user credentials",
+  "signup":"Sign Up",
+  "wrongName":"Your name is required",
+  "wrongUsername":"Username already exists",
+  "wrongEmail":"Wrong email or already exists",
+  "wrongPassword":"Password must be upto 8 letters"
+}

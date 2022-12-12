@@ -17,6 +17,7 @@ function Navbar({changeColor,colorModeIcon}: Props) {
   const [showMenu,setShowMenu] = useState(false)
   const [openSearchBar,setSearchBar] = useState(false)
   const [region,setRegion] = useState("General")
+  const [searchTerm,setSearhTerm] = useState("")
   const router = useRouter();
   const { t, lang } = useTranslation('common')
   const searchButton = <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
@@ -58,7 +59,18 @@ function Navbar({changeColor,colorModeIcon}: Props) {
           <div className={`absolute ${openSearchBar ? "translate-y-0":"-translate-y-44"} duration-300 p-10 z-40 -left-6 top-0 right-0 bg-black h-44 text-white`}>
             <h3 className='text-2xl'>#{t("searchHead")}</h3>
             <div className='text-center'>
-              <input type="search" placeholder={t('search')} className='border-b-2 text-white focus:outline-none text-2xl w-full bg-transparent border-white p-2' />
+              <form className='flex'>
+                <input type="search" value={searchTerm} onChange={(e) => setSearhTerm(e.target.value)} placeholder={t('search')} className='border-b-2 text-white focus:outline-none text-2xl w-full bg-transparent border-white p-2' />
+                <button className='btn bg-white text-black px-4' type='submit' onClick={(e) => 
+                  {
+                    e.preventDefault();
+                    router.push( {pathname:"/search",query:{q:searchTerm,tab:"news"}});
+                    setSearchBar(false);
+                  
+                  }
+
+                  }><SearchIcon/></button>
+              </form>
               <button className='text-white uppercase mt-4' onClick={(e) => setSearchBar(false)}>{t("close")}</button>
             </div>
             </div>
@@ -67,6 +79,15 @@ function Navbar({changeColor,colorModeIcon}: Props) {
           {langDropDown}
           {colorModeSwitch}
           </div>
+          
+          <Dropdown 
+            title='Abhishek Bhatta'
+            items={[
+              {title:"Profile",handle:() => router.push("/writer/me")},
+              {title:"Create",handle:() => router.push("/writer/create")},
+              {title:"Logout",handle:() => router.push("/writer/logout")},
+              ]}
+          />
           <button
             onClick={() => handleClick("/login")}
             className="border-2 border-black px-4 dark:border-white hover:dark:bg-white hover:dark:text-black hover:bg-black hover:text-white"
