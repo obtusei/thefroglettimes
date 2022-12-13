@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { LeaderboardAd, RectangleAd } from '../components/Ads'
 import Dropdown, { DropdownTwo } from '../components/Dropdown'
 import Layout from '../components/Layout'
-import { NewsCard, NewsCardWithImageTop } from '../components/News/Card'
+import { ModernNewsCard, NewsCard, NewsCardWithImageTop } from '../components/News/Card'
 import news from "../libs/news.json"
 import Link from 'next/link'
 import { CheckIcon, InfoIcon } from '../components/Icons'
@@ -96,7 +96,7 @@ function News({}: Props) {
             {
               news.map((content,index) => (
                 <div key={index} className=''>
-                  <NewsCard
+                  <ModernNewsCard
                     image={content.image}
                     title={content.title}
                     description={content.description}

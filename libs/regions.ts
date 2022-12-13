@@ -5,6 +5,10 @@ const regions =  [
     action:() => alert("asds")
   },
   {
+    title:"International",
+    action:() => alert("asds")
+  },
+  {
     title:"Province 1",
     action:() => alert("asds")
   },

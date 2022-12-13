@@ -6,5 +6,12 @@
   "search":"Search news, article, section, journalist",
   "searchHead":"Search",
   "close":"Close",
-  "breakingNews":"BREAKING NEWS"
+  "breakingNews":"BREAKING NEWS",
+  "todayHeadline":"Today's Headlines",
+  "latestNews":"Latest News",
+  "horoscope":"Horoscope",
+  "international":"International",
+  "classified":"Classified",
+  "live":"Live"
+
 }

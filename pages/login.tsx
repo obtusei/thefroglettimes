@@ -4,13 +4,16 @@ import React, { useState } from "react";
 import LoginForm from "../components/Loginform";
 import axios from "axios";
 import Layout from "../components/Layout";
-
+import { loginTheUser } from "../utils/userapi";
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from "next/router";
 export default function Login() {
 
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [loginError,setLoginError] = useState(false)
   const {t} = useTranslation("register")
+  const {data:session} = useSession()
   const postRequest = async () => {
       const data = { username:email,password:password}
       axios.post(`https://djangohosting.pythonanywhere.com/api/login`,data)
@@ -21,6 +24,10 @@ export default function Login() {
         setLoginError(true)
       })
       
+  }
+  const router = useRouter()
+  if (session){
+    router.push("/")
   }
   return (
     <Layout hideFooter hideNav>
@@ -43,7 +50,10 @@ export default function Login() {
             <label className="">{t("password")}</label>
             <input type="password" name="" id="password" className="search w-full" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
           </div>
-          <button type="submit" className="btn w-full" onClick={postRequest}>{t("loginButton")}</button>
+          <button type="submit" className="btn w-full" onClick={() => {
+            // loginTheUser({password:password,username:email})
+            signIn("credentials", { username: email, password: password,callbackUrl:"/" })
+          }}>{t("loginButton")}</button>
           <p className="text-center">{t("notAMember")}{" "}<Link href={"/signup"} className="text-green-700">{t("signup")}</Link></p>
 
         </div>

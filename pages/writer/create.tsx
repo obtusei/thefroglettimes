@@ -68,15 +68,15 @@ function CreateNews({}: Props) {
       <div className='p-2 space-x-4'>
         <select>
         {
-          categories.map((cat) => (
-            <option value={cat.title}>{cat.title}</option>
+          categories.map((cat,index) => (
+            <option value={cat.title} key={index}>{cat.title}</option>
           ))
         }
       </select>
       <select>
       { 
-          regions.map((cat) => (
-            <option value={cat.title}>{cat.title}</option>
+          regions.map((cat,index) => (
+            <option key={index} value={cat.title}>{cat.title}</option>
           ))
         }
       </select>

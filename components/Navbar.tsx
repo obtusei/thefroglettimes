@@ -3,10 +3,12 @@ import { CloseIcon, HamMenu, SearchIcon, SunIcon, SunsetIcon } from './Icons'
 import useTranslation from 'next-translate/useTranslation'
 import Dropdown, { DropdownTwo } from './Dropdown'
 import regions from '../libs/regions'
-import categories from "../libs/categories.json"
+// import categories from "../libs/categories.json"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { GetCategories } from '../utils/newsapi'
+import { signOut, useSession } from 'next-auth/react'
 
 type Props = {
   changeColor: () => void;
@@ -17,14 +19,22 @@ type Props = {
 
 function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
   const date = new Date()
+  const {categories,isError} = GetCategories();  
+  // const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=27.5808256&lon=85.5179264&appid=b0b7a001a8281701c327f0974b36151c&units=metric`
+  // const [weather,setWeather] = useState<any>(null)
+  // useEffect(() => {
+  //   fetch(weatherURL)
+  //   .then(res => res.json())
+  //   .then(data => setWeather(data))
+  // },[weatherURL])
   
-  const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=27.5808256&lon=85.5179264&appid=b0b7a001a8281701c327f0974b36151c`
   const [showMenu,setShowMenu] = useState(false)
   // const [openSearchBar,setSearchBar] = useState(showSearch)
   const [region,setRegion] = useState("General")
   const [searchTerm,setSearhTerm] = useState("")
   const router = useRouter();
   const { t, lang } = useTranslation('common')
+  const {data:session} = useSession();
   const searchButton = <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
   const handleClick = (path: string) => {
     router.push(path);
@@ -43,7 +53,17 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
             }
           </Dropdown>
   const colorModeSwitch = <button onClick={changeColor}>{colorModeIcon}</button>
-  const regionDropDown = <DropdownTwo title='REGION' items={regions} value={region}/>
+  const regionDropDown = <Dropdown title={`${router.query.region ? router.query.region:region}`}value={region}>
+     <ul className="py-1 text-gray-700 dark:text-gray-200">
+                {
+                  regions.map((region,index) => (
+                    <li key={index} className="block py-2 px-4 w-full uppercase hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <Link href={`?region=${region.title}`} shallow>{region.title}</Link>
+                    </li>
+                  ))
+                }
+              </ul>
+  </Dropdown>
   return (
     <div className=''>
       <div className=''>
@@ -85,29 +105,32 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
           {colorModeSwitch}
           </div>
           
-          <Dropdown 
+          {
+            session ? <Dropdown 
             title='Abhishek Bhatta'
             items={[
               {title:"Profile",handle:() => router.push("/writer/me")},
               {title:"Create",handle:() => router.push("/writer/create")},
-              {title:"Logout",handle:() => router.push("/writer/logout")},
+              {title:"Logout",handle:() => signOut()},
               ]}
-          />
+          />:
           <button
             onClick={() => handleClick("/login")}
             className="border-2 border-black px-4 dark:border-white hover:dark:bg-white hover:dark:text-black hover:bg-black hover:text-white"
           >
             Login
           </button>
+          }
         </div>
       </div>
       <hr className='border-t-gray-400 mx-5'/>
       <div className='hidden md:block p-2 '>
         <ul className='flex flex-wrap space-x-4 justify-center items-center '>
           {
-            categories.map((cat,index) => (
-              <li key={index} className="hover:text-green-700"><Link href={cat.href}>{cat.title}</Link></li>
-            ))
+            categories ? categories.map((cat:any,index:number) => (
+              <li key={index} className="hover:text-green-700"><Link href={`/section/${cat.id}`}>{cat.category}</Link></li>
+            )):
+            <li></li>
           }
         </ul>
       </div>
@@ -119,7 +142,9 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
         </div>
         <div className='flex items-center space-x-4'>
           <SunsetIcon/>
-          <p className='font-bold text-xl'>13°C</p>
+          <p className='font-bold text-xl'>
+            {/* {weather.main.temp}°C */}12°C
+            </p>
           <p>22°C - 6°C</p>
         </div>
 
@@ -138,9 +163,9 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
         <div className='mt-2'>
           <ul>
             {
-              categories.map((cat,index) => (
-                <li key={index} className="hover:text-green-700 hover:dark:text-green-400"><Link href={cat.href}>{cat.title}</Link></li>
-              ))
+              categories ? categories.map((cat,index) => (
+                <li key={index} className="hover:text-green-700 hover:dark:text-green-400"><Link href={`/section/${cat.id}`}>{cat.category}</Link></li>
+              )):<>Loading...</>
             }
           </ul>
         </div>
