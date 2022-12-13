@@ -14,11 +14,28 @@ export default function SignUp() {
   const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
   const {t} = useTranslation("register")
-  const postRequest = async () => {
+  const postRequest = () => {
     try{
-      const data = { fullName:fullName,username:username,password:password}
-      const request = await axios.post(`https://djangohosting.pythonanywhere.com/api/login`,data)
-      console.log(request.data)
+      const data = { fullname:fullName,email:username,password:password}
+      fetch('/api/user', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.message){
+              alert(data.message)
+            }else{
+              router.push("/")
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+      
     }
     catch{
       console.log("ERROR AAYO");
@@ -53,7 +70,10 @@ export default function SignUp() {
             <input type="password" name="" id="password" className="search w-full" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
             <p className="text-red-600">{(t("loginError"))}</p>
           </div>
-          <button type="submit" className="btn w-full" onClick={() => registerTheUser({password:password,password2:password,username:username,full_name:fullName})}>{t("signup")}</button>
+          <button type="submit" className="btn w-full" onClick={() => {
+              postRequest();
+            // registerTheUser({password:password,password2:password,username:username,full_name:fullName})
+          }}>{t("signup")}</button>
           <p className="text-center">{t("notAMember")}{" "}<Link href={"/login"} className="text-green-700">{t("loginButton")}</Link></p>
         </div>
       </div>

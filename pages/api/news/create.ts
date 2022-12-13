@@ -41,7 +41,7 @@ export default async function handler(
           },
         author:{
           connect:{
-            email:"abhishekbhatta02@gmail.com"
+            email:data.userEmail
           }
         }
       },

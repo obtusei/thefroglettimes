@@ -19,7 +19,7 @@ export default async function handler(
       res.status(200).json(user)
     }
     catch{
-      res.status(404).json({message:"ERROR"})
+      res.status(404).json({message:"ERROR creating user"})
     }
   }
   else if (req.method == "GET"){

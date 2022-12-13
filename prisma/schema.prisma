@@ -32,6 +32,7 @@ model Category {
   id       String    @unique @default(cuid())
   title    String    @unique
   href     String
+  ne       String
   articles Article[]
 }
 

@@ -1,77 +1,87 @@
 [
   {
     "title":"Politics",
-    "lang":{
-      "ne":"Raj"
-    },
+    "ne":"राजनीति",
     "href":"/section/politics"
   },
   {
     "title":"Economy",
+    "ne":"अर्थव्यवस्था",
     "href":"/section/economy"
   },
   {
     "title":"Business",
+    "ne":"व्यवसाय",
     "href":"/section/business"
   },
   {
     "title":"Finance",
+    "ne":"वित्त",
     "href":"/section/finance"
   },
   {
     "title":"Health",
+    "ne":"स्वास्थ्य",
     "href":"/section/health"
   },
   {
     "title":"Sports",
+    "ne":"खेलकुद",
     "href":"/section/sports"
   },
   {
     "title":"Travel",
+    "ne":"यात्रा",
     "href":"/section/travel"
   },
   {
     "title":"Entertainment",
+    "ne":"मनोरञ्जन",
     "href":"/section/entertainment"
   },
   {
     "title":"Food",
+    "ne":"खाना",
     "href":"/section/food"
   },
   {
     "title":"Arts",
+    "ne":"कला",
     "href":"/section/arts"
   },
   {
     "title":"Lifestyle",
+    "ne":"जीवनशैली",
     "href":"/section/lifestyle"
   },
   {
     "title":"Opinions",
+    "ne":"विचार",
     "href":"/section/opinions"
   },
   {
     "title":"Tech",
+    "ne":"टेक",
     "href":"/section/tech"
   },
   {
     "title":"Science",
+    "ne":"विज्ञान",
     "href":"/section/science"
   },
   {
     "title":"Culture",
+    "ne":"संस्कृति",
     "href":"/section/culture"
   },
   {
     "title":"Books",
+    "ne":"पुस्तकहरू",
     "href":"/section/books"
   },
   {
-    "title":"Letters",
-    "href":"/section/letters"
-  },
-  {
     "title":"Education",
+    "ne":"शिक्षा",
     "href":"/section/education"
   }
 

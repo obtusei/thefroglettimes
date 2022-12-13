@@ -2,8 +2,8 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "../../../prisma/prisma";
 import useSWR from 'swr'
-
-export default NextAuth({
+import type { NextAuthOptions } from 'next-auth'
+export const authOptions:NextAuthOptions = {
   
   providers: [
       CredentialsProvider({
@@ -39,12 +39,16 @@ export default NextAuth({
       // first time jwt callback is run, user object is available
       if (user) {
         token.id = user.id;
+        token.name = user.name
+        token.email = user.email
       }
 
       return token;
     },
     session: ({ session, token }) => {
       if(token){
+        // session.user?.name=token.name
+        
       }
       return session;
 
@@ -57,4 +61,5 @@ export default NextAuth({
   //       signIn:'/login'
   // },
   
-});
+}
+export default NextAuth(authOptions);

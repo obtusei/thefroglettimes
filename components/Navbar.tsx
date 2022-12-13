@@ -3,12 +3,13 @@ import { CloseIcon, HamMenu, SearchIcon, SunIcon, SunsetIcon } from './Icons'
 import useTranslation from 'next-translate/useTranslation'
 import Dropdown, { DropdownTwo } from './Dropdown'
 import regions from '../libs/regions'
-// import categories from "../libs/categories.json"
+import livenews from "../libs/livenews.json"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { GetCategories } from '../utils/newsapi'
 import { signOut, useSession } from 'next-auth/react'
+import { GetSession } from '../utils/userapi'
 
 type Props = {
   changeColor: () => void;
@@ -20,6 +21,7 @@ type Props = {
 function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
   const date = new Date()
   const {categories,isError} = GetCategories();  
+
   // const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=27.5808256&lon=85.5179264&appid=b0b7a001a8281701c327f0974b36151c&units=metric`
   // const [weather,setWeather] = useState<any>(null)
   // useEffect(() => {
@@ -35,6 +37,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
   const router = useRouter();
   const { t, lang } = useTranslation('common')
   const {data:session} = useSession();
+  const {userSession} = GetSession();
   const searchButton = <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
   const handleClick = (path: string) => {
     router.push(path);
@@ -52,8 +55,8 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
               </ul>
             }
           </Dropdown>
-  const colorModeSwitch = <button onClick={changeColor}>{colorModeIcon}</button>
-  const regionDropDown = <Dropdown title={`${router.query.region ? router.query.region:region}`}value={region}>
+      const colorModeSwitch = <button onClick={changeColor}>{colorModeIcon}</button>
+      const regionDropDown = <Dropdown title={`${router.query.region ? router.query.region:region}`}value={region}>
      <ul className="py-1 text-gray-700 dark:text-gray-200">
                 {
                   regions.map((region,index) => (
@@ -73,7 +76,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
           <button onClick={() => setShowMenu(true)}><HamMenu/></button>
           <div className='hidden md:flex items-center'>
             <p>{date.toDateString()}</p>
-            {regionDropDown}
+            {router.pathname == "/" && regionDropDown}
           </div>
         </div>
         
@@ -104,10 +107,9 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
           {langDropDown}
           {colorModeSwitch}
           </div>
-          
           {
             session ? <Dropdown 
-            title='Abhishek Bhatta'
+            title={userSession.fullname}
             items={[
               {title:"Profile",handle:() => router.push("/writer/me")},
               {title:"Create",handle:() => router.push("/writer/create")},
@@ -128,7 +130,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
         <ul className='flex flex-wrap space-x-4 justify-center items-center '>
           {
             categories ? categories.map((cat:any,index:number) => (
-              <li key={index} className="hover:text-green-700"><Link href={`/section/${cat.id}`}>{cat.category}</Link></li>
+              <li key={index} className="hover:text-green-700"><Link href={cat.href}>{router.locale == "en" ? cat.title:cat.ne}</Link></li>
             )):
             <li></li>
           }
@@ -137,8 +139,14 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
       <hr className='border-t-gray-400  mx-5'/>
       <div className='px-5 py-4 text-center flex justify-between items-center space-x-4'>
         <div className='flex items-center space-x-4'>
-        <span className='text-red-600 dark:text-blue-200 font-bold text-xs'>LIVE</span>
-        <p>Columbia vs Brazil</p>
+        <span className='text-red-600 dark:text-blue-200 font-bold text-xs'>{t("live")}</span>
+        {
+          router.locale === "en" ? livenews.en.map((content) => (
+            <p className={`pr-2  border-r-2`}>{content.title}</p>
+          )): livenews.ne.map((content) => (
+            <p className={`pr-2  border-r-2`}>{content.title}</p>
+          ))
+        }
         </div>
         <div className='flex items-center space-x-4'>
           <SunsetIcon/>
@@ -163,9 +171,9 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
         <div className='mt-2'>
           <ul>
             {
-              categories ? categories.map((cat,index) => (
-                <li key={index} className="hover:text-green-700 hover:dark:text-green-400"><Link href={`/section/${cat.id}`}>{cat.category}</Link></li>
-              )):<>Loading...</>
+              categories ? categories.map((cat:any,index:number) => (
+                <li key={index} className="hover:text-green-700 hover:dark:text-green-400"><Link href={cat.href}>{router.locale == "en" ? cat.title:cat.ne}</Link></li>
+              )):<>...</>
             }
           </ul>
         </div>

@@ -6,7 +6,7 @@ const url =  "https://djangohosting.pythonanywhere.com/api"
 const fetcher = (url:string)=> axios.get(url).then(res => res.data)
 
 export const GetCategories = () => {
-    const { data, error } = useSWR<[{id:number,category:string}]>(`https://djangohosting.pythonanywhere.com/api/news/info/category`, fetcher)
+    const { data, error } = useSWR(`/api/news/category`, fetcher)
     return {
       categories:data,
       isLoading: !error && !data,

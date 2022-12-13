@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
-import categories from "../../libs/categories.json"
 import regions from '../../libs/regions'
+import { createNews } from '../../utils/userapi'
+import { useSession } from 'next-auth/react'
+import { GetCategories } from '../../utils/newsapi'
+import { ExitFullScreenIcon, FullScreenIcon } from '../../components/Icons'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {	
 	ssr: false,
@@ -51,38 +54,49 @@ const formats = [
 type Props = {}
 
 function CreateNews({}: Props) {
-  const [content,setContent] = useState("<h1>Hello</h1>")
-  const [showNav,setShowNav] = useState(false)
   const router = useRouter();
+  const [title,setTitle] = useState("")
+  const [category,setCategory] = useState("General")
+  const [region,setRegion] = useState("General");
+  const [language,setLanguage] = useState(router.locale?.toUpperCase());
+  const [content,setContent] = useState("")
+  const [showNav,setShowNav] = useState(false)
+  const {categories} = GetCategories();
+  const {data:session} = useSession();
   return (
     <Layout hideNav={showNav} hideFooter={showNav}>
       <div className='p-4'>
       <div className='flex items-center justify-between'>
-        <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' />
-      <div className='space-x-6'>
-        <button onClick={() => setShowNav(!showNav)}>Show Nav</button>
+        <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' value={title} onChange={(e) => setTitle(e.target.value)} />
+      <div className='space-x-6 flex items-center'>
+        <button onClick={() => setShowNav(!showNav)}>{!showNav ? <FullScreenIcon/>:<ExitFullScreenIcon/>}</button>
         
-        <button className='btn' onClick={() => alert(content)}>Publish</button>
+        <button className='btn' onClick={() => {
+          if (session){
+            createNews({title,content,category,imageUrl:"",region,language,userEmail:session.user?.email})
+            alert("Article Created Successfully")
+          }
+        }}>Publish</button>
       </div>
       </div>
       <div className='p-2 space-x-4'>
-        <select>
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
         {
-          categories.map((cat,index) => (
+          categories ? categories?.map((cat:any,index:number) => (
             <option value={cat.title} key={index}>{cat.title}</option>
-          ))
+          )):<></>
         }
       </select>
-      <select>
+      <select value={region} onChange={(e) => setRegion(e.target.value)}>
       { 
           regions.map((cat,index) => (
             <option key={index} value={cat.title}>{cat.title}</option>
           ))
         }
       </select>
-      <select>
-        <option value="">EN</option>
-        <option value="">NE</option>
+      <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+        <option value="EN">EN</option>
+        <option value="NE">NE</option>
       </select>
       </div>
       
@@ -93,7 +107,7 @@ function CreateNews({}: Props) {
         placeholder='Write Something Nice Today'
         value={content}
         onChange={(value) => setContent(value)}
-        className="h-96"
+        className="h-96 dark:fill-white"
       />
     </div>
     </Layout>

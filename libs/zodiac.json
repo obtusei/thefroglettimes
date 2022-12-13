@@ -87,11 +87,81 @@
       ],
     "ne":[
         {
-            "name":"Aries",
-            "svg_symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Aries_symbol_%28fixed_width%29.svg/320px-Aries_symbol_%28fixed_width%29.svg.png?1670582573104",
+            "name":"मेष",
+            "svg_symbol": "https://www.hamropatro.com/images/dummy/ic_sodiac_1.png",
+            "unicode":"♈︎",
+            "date":"चु, चे, चो, ला, लि, लु, ले, लो, अ",
+            "today":"आज आर्थिक समस्याले तनावको सिर्जना हुनसक्छ । व्यवसायमा नोक्सानी बेहोर्नु पर्नेछ । प्रेमी र प्रेमिकाका बिच खिन्नता पनि बढ्नसक्छ ।"
+        },
+        {
+            "name":"वृष",
+            "svg_symbol": "https://www.hamropatro.com/images/dummy/ic_sodiac_2.png",
+            "unicode":"♈︎",
+            "date":"इ, उ, ए, ओ, वा, वि, वु, वे, वो",
+            "today":"मित्रवर्ग वा हितैषीबाट राम्रो सहयोग मिल्नेछ । आफ्नो क्षेत्रमा प्रभुत्व जमाउन सकिनेछ । नयाँ व्यवसाय वा नयाँ कार्यको थालनी पनि हुनसक्छ ।"
+        },
+        {
+            "name":"मिथुन",
+            "svg_symbol": "https://www.hamropatro.com/images/dummy/ic_sodiac_3.png",
+            "unicode":"♈︎",
+            "date":"का, कि, कु, घ, ङ, छ, के, को, हा",
+            "today":"आज आफूले काम देखाएर अरूको मन लोभ्याउन सकिनेछ । वित्तिय संस्थाबाट सहयोग पाइनेछ । सुखद् यात्राका अवसर पनि प्राप्त हुनेछन् ।"
+        },
+        {
+            "name":"",
+            "svg_symbol": "",
             "unicode":"♈︎",
             "date":"",
-            "today":"Try to get out of your office early and do things that you really enjoy."
+            "today":""
+        },
+        {
+            "name":"",
+            "svg_symbol": "",
+            "unicode":"♈︎",
+            "date":"",
+            "today":""
+        },
+        {
+            "name":"",
+            "svg_symbol": "",
+            "unicode":"♈︎",
+            "date":"",
+            "today":""
+        },
+        {
+            "name":"",
+            "svg_symbol": "",
+            "unicode":"♈︎",
+            "date":"",
+            "today":""
+        },
+        {
+            "name":"",
+            "svg_symbol": "",
+            "unicode":"♈︎",
+            "date":"",
+            "today":""
+        },
+        {
+            "name":"",
+            "svg_symbol": "",
+            "unicode":"♈︎",
+            "date":"",
+            "today":""
+        },
+        {
+            "name":"",
+            "svg_symbol": "",
+            "unicode":"♈︎",
+            "date":"",
+            "today":""
+        },
+        {
+            "name":"",
+            "svg_symbol": "",
+            "unicode":"♈︎",
+            "date":"",
+            "today":""
         }
         
       ]
