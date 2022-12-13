@@ -56,8 +56,8 @@ export function ModernNewsCard({title,description,image,imageSize,author,readTim
 export function NewsCardWithImageTop({title,description,image,imageSize,author,readTime,size,publishedAt,category}: Props) {
   const date = new Date(publishedAt).toDateString()
   return (
-    <div className='flex flex-col'>
-      {image && <Image src={image} width={imageSize ? imageSize:300} height={10} style={{objectFit:"cover"}} alt="sadsa"/>}
+    <div className='grid grid-cols-1'>
+      {image && <Image src={image} width={imageSize ? imageSize:300} height={10} className={"w-full object-cover"} alt="sadsa"/>}
         <div className='py-2'>
           {
             category && <p className='text-green-700'>{category}</p>

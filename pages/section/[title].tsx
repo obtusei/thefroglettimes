@@ -1,8 +1,9 @@
+import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import { LeaderboardAd, WideSkyscrapersAd } from '../../components/Ads'
+import { LeaderboardAd, RectangleAd, WideSkyscrapersAd } from '../../components/Ads'
 import Layout from '../../components/Layout'
-import { NewsCard, NewsCardWithImageTop } from '../../components/News/Card'
+import { ModernNewsCard, NewsCard, NewsCardWithImageTop } from '../../components/News/Card'
 import { MONTHS } from '../../libs/filterStuff'
 import news from "../../libs/news.json"
 import regions from '../../libs/regions'
@@ -20,6 +21,7 @@ function Section({}: Props) {
   const [month,setMonth] = useState(MONTHS[date.getMonth()])
   const [day,setDay] = useState(date.getDate())
   const [region,setRegion] = useState("General")
+  const {t} = useTranslation("common")
   return (
     <Layout>
       <div className='p-5'>
@@ -27,11 +29,18 @@ function Section({}: Props) {
         <hr />
         <div className='grid grid-cols-3 py-2'>
           <div className='col-span-3 md:col-span-2 md:border-r-2 border-black'>
-            <div className='grid grid-cols-1 gap-2'>
+            <div className='grid grid-cols-1 gap-2 px-2'>
+              <NewsCardWithImageTop
+                title='Something goes here pani at the bottom of the image'
+                description='Lorem Ipsum'
+                image='/img.webp'
+                publishedAt='time'
+                />
+              <div className='grid grid-cols-4 gap-3'>
               {
               news.map((content,index)=> (
-                <div key={index} className='col-span-3 md:col-span-1'>
-                  <NewsCard 
+                <div key={index} className='col-span-4 md:col-span-2'>
+                  <ModernNewsCard 
                     title={content.title}
                     description={content.description}
                     author={content.author}
@@ -42,6 +51,7 @@ function Section({}: Props) {
                 </div>
               ))
             }
+              </div>
             </div>
           </div>
           <div className='col-span-3 md:col-span-1 p-2'>
@@ -49,7 +59,7 @@ function Section({}: Props) {
               {
               news.map((content,index)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
-                  <NewsCardWithImageTop 
+                  <ModernNewsCard 
                     title={content.title}
                     description={content.description}
                     author={content.author}
@@ -60,13 +70,14 @@ function Section({}: Props) {
                 </div>
               ))
             }
+            <RectangleAd/>
             </div>
           </div>
         </div>
         <hr />
         {/* Latest News */}
         <div>
-            <h2 className='text-3xl py-2 font-bold'>Latest News</h2>
+            <h2 className='text-3xl py-2 font-bold'>{t("latestNews")}</h2>
             <div className="flex flex-col-reverse md:flex-row space-y-3 md:space-y-0 justify-between py-4">
               <div className='p-2 space-x-3'>
                 <select value={region} onChange={(e) => setRegion(e.target.value)}>

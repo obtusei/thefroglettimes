@@ -58,21 +58,23 @@ export default function SignUp() {
           <div>
             <label className="mt-2">{t("fullName")}</label>
             <input type="email" name="" id="firstName" className="search w-full" placeholder="John Doe" value={fullName} onChange={(e) => setFullName(e.target.value)} />
-            <p className="text-red-600">{(t("loginError"))}</p>
+            {/* <p className="text-red-600">{(t("loginError"))}</p> */}
           </div>
           <div>
             <label className="mt-2">{t("email")}</label>
             <input type="email" name="" id="email" className="search w-full" placeholder="example@example.com" value={username} onChange={(e) => setUsername(e.target.value)} />
-            <p className="text-red-600">{(t("loginError"))}</p>
+            {/* <p className="text-red-600">{(t("loginError"))}</p> */}
           </div>
           <div>
             <label className="">{t("password")}</label>
             <input type="password" name="" id="password" className="search w-full" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
-            <p className="text-red-600">{(t("loginError"))}</p>
+            {/* <p className="text-red-600">{(t("loginError"))}</p> */}
           </div>
           <button type="submit" className="btn w-full" onClick={() => {
-              postRequest();
-            // registerTheUser({password:password,password2:password,username:username,full_name:fullName})
+              // postRequest();
+            registerTheUser({password:password,password2:password,username:username,full_name:fullName})
+            alert("USER SUCCESSFULL CREATED");
+            router.push("/login")
           }}>{t("signup")}</button>
           <p className="text-center">{t("notAMember")}{" "}<Link href={"/login"} className="text-green-700">{t("loginButton")}</Link></p>
         </div>

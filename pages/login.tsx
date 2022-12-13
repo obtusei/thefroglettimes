@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import LoginForm from "../components/Loginform";
 import axios from "axios";
 import Layout from "../components/Layout";
-import { loginTheUser } from "../utils/userapi";
+import { GetSessionDjango, loginTheUser } from "../utils/userapi";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/router";
 export default function Login() {
@@ -14,6 +14,7 @@ export default function Login() {
   const [loginError,setLoginError] = useState(false)
   const {t} = useTranslation("register")
   const {data:session} = useSession()
+  const {userSession:djyango} = GetSessionDjango()
   const postRequest = async () => {
       const data = { username:email,password:password}
       axios.post(`https://djangohosting.pythonanywhere.com/api/login`,data)
@@ -34,6 +35,7 @@ export default function Login() {
       <div className="flex font-serif flex-col justify-center items-center h-screen">
       <div>
         <h1 className="font-logo text-3xl p-2"><Link href={"/"}>{t("logo")}</Link></h1>
+        <p>{djyango ? JSON.stringify(djyango):"asdsda"}</p>
       </div>
       <div className="border-2 border-black-500 p-3 py-5 w-1/3 flex flex-col">
         <h3 className="text-2xl">{t("login")}</h3>
@@ -51,8 +53,9 @@ export default function Login() {
             <input type="password" name="" id="password" className="search w-full" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
           </div>
           <button type="submit" className="btn w-full" onClick={() => {
-            // loginTheUser({password:password,username:email})
-            signIn("credentials", { username: email, password: password,callbackUrl:"/" })
+            loginTheUser({password:password,username:email})
+
+            // signIn("credentials", { username: email, password: password,callbackUrl:"/" })
           }}>{t("loginButton")}</button>
           <p className="text-center">{t("notAMember")}{" "}<Link href={"/signup"} className="text-green-700">{t("signup")}</Link></p>
 

@@ -12,8 +12,17 @@ export const GetSession = () => {
       isLoading: !error && !data,
       isError:error
     }
-
 }
+
+export const GetSessionDjango = () => {
+    const { data, error } = useSWR(`https://djangohosting.pythonanywhere.com/api/users/profile/`, fetcher)
+    return {
+      userSession:data,
+      isLoading: !error && !data,
+      isError:error
+    }
+}
+
 export const createNews = ({title,imageUrl,content,category,region,language,userEmail}:any) => {
     const data = {
         title:title,
@@ -74,6 +83,7 @@ export const loginTheUser = ({password,username}:any) => {
         headers: {
             'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(data),
         })
         .then((response) => response.json())
