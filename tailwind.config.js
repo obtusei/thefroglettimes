@@ -14,8 +14,10 @@ module.exports = {
         body:['Abhaya Libre','serif'],
         tag:['EB Garamond','serif'],
         logo:['Chomsky','serif'],
-        devlogo:[ 'Rozha One', 'serif'],
-        devtitle:['Biryani','serif'],
+        devlogo:[ 'Akhand-Bold', 'serif'],
+        devhead:['Akhand-Bold','serif'],
+        devtitle:['Akhand','serif'],
+        devbody:['Shree','serif'],
         // logo:['Vast Shadow', 'cursive']
       }
     },

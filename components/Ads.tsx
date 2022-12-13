@@ -14,7 +14,7 @@ export const WideSkyscrapersAd = () => {
 
 export const RectangleAd = () => {
   return (
-    <div className='bg-yellow-500 h-24 m-4 text-center text-3xl text-white'>ADS</div>
+    <div className='bg-yellow-500 h-60 m-4 text-center text-3xl text-white'>ADS</div>
   )
 }
 

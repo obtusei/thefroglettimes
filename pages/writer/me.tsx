@@ -4,6 +4,7 @@ import ennews from "../.../../../libs/news.json"
 import nenews from "../.../../../libs/nenews.json"
 import { NewsCard } from '../../components/News/Card'
 import Dropdown from '../../components/Dropdown'
+import Image from 'next/image'
 type Props = {}
 
 function WriterProfile({}: Props) {
@@ -12,7 +13,7 @@ function WriterProfile({}: Props) {
     <Layout>
       <div className='p-5'>
         <div>
-
+        <Image src={"/img.webp"} width={400} height={40} className="w-20 h-20 object-cover rounded-full" alt='Avatar'/>
         <h1 className='text-3xl'>Abhishek bhatta</h1>
         <h3 className='text-gray-500 dark:text-gray-300'>abhishekbhatta@gmail.com</h3>
         </div>

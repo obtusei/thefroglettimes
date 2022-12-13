@@ -1,74 +1,19 @@
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
-import { LeaderboardAd, WideSkyscrapersAd } from '../../components/Ads'
-import Layout from '../../components/Layout'
-import { NewsCard, NewsCardWithImageTop } from '../../components/News/Card'
-import { MONTHS } from '../../libs/filterStuff'
-import news from "../../libs/news.json"
-import regions from '../../libs/regions'
-type Props = {}
+import regions from "../libs/regions"
+import { useState } from "react"
+import { NewsCard } from "./News/Card"
 
-function capitalizeFirstLetter(str:string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+export default function Timeline(){
 
-function Section({}: Props) {
-  const router = useRouter()
-  const title = capitalizeFirstLetter(String(router.query.title))
-  const date = new Date()
-  const [year,setYear] = useState(String(date.getFullYear()))
-  const [month,setMonth] = useState(MONTHS[date.getMonth()])
-  const [day,setDay] = useState(date.getDate())
-  const [region,setRegion] = useState("General")
-  return (
-    <Layout>
-      <div className='p-5'>
-        <h2 className='text-4xl'>{title}</h2>
-        <hr />
-        <div className='grid grid-cols-3 py-2'>
-          <div className='col-span-3 md:col-span-2 md:border-r-2 border-black'>
-            <div className='grid grid-cols-1 gap-2'>
-              {
-              news.map((content,index)=> (
-                <div key={index} className='col-span-3 md:col-span-1'>
-                  <NewsCard 
-                    title={content.title}
-                    description={content.description}
-                    author={content.author}
-                    image={content.image}
-                    publishedAt={content.published_at}
-                    imageSize={250}
-                    />
-                </div>
-              ))
-            }
-            </div>
-          </div>
-          <div className='col-span-3 md:col-span-1 p-2'>
-            <div className='grid grid-cols-1 gap-2'>
-              {
-              news.map((content,index)=> (
-                <div key={index} className='col-span-3 md:col-span-1'>
-                  <NewsCardWithImageTop 
-                    title={content.title}
-                    description={content.description}
-                    author={content.author}
-                    image={content.image}
-                    publishedAt={content.published_at}
-                    imageSize={150}
-                    />
-                </div>
-              ))
-            }
-            </div>
-          </div>
-        </div>
-        <hr />
-        {/* Latest News */}
+    const [region,setRegion] = useState("")
+    const [year,setYear] = useState("")
+    const [month,setMonth] = useState("")
+    const [region,setRegion] = useState("")
+    return(
         <div>
             <h2 className='text-3xl py-2 font-bold'>Latest News</h2>
             <div className="flex flex-col-reverse md:flex-row space-y-3 md:space-y-0 justify-between py-4">
               <div className='p-2 space-x-3'>
+
                 <select value={region} onChange={(e) => setRegion(e.target.value)}>
                   {
                     regions.map((item) => (
@@ -119,7 +64,7 @@ function Section({}: Props) {
                           image='/img.webp'
                           imageSize={250}
                           publishedAt={"content.published_at"}
-                      
+                          reverse
                           />
                     </div>
                 ))
@@ -134,9 +79,5 @@ function Section({}: Props) {
             </div>
 
         </div>
-      </div>
-    </Layout>
-  )
+    )
 }
-
-export default Section

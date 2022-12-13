@@ -8,9 +8,11 @@ import { NewsCard, NewsCardWithImageTop } from '../components/News/Card'
 import Link from 'next/link'
 import horoscope from "../libs/zodiac.json"
 import { useRouter } from 'next/router'
+import useTranslation from 'next-translate/useTranslation'
 export default function Home() {
   const router = useRouter();
   const news = router.locale == "en" ? ennews:nenews
+  const {t} = useTranslation("common")
   return (
     <Layout>
       <Head>
@@ -21,7 +23,7 @@ export default function Home() {
     <LeaderboardAd/>
     <div className='grid grid-cols-3 p-4'>
      <div className='md:border-r-2 border-r-gray-300 px-2 col-span-3 md:col-span-2'>
-      <h3 className='text-2xl font-bold'>BREAKING NEWS</h3>
+      <h3 className={`text-2xl font-bold ${router.locale == "en" ? "":"font-devhead"}`}>{t("breakingNews")}</h3>
       <div className='grid grid-cols-3'>
         <div className='col-span-3 md:col-span-1 md:border-b-2 md:border-r-2 md:border-gray-300 md:mr-2 h-full'>
           {

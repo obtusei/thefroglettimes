@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import Layout from '../../components/Layout'
+import { useRouter } from 'next/router'
+import categories from "../../libs/categories.json"
+import regions from '../../libs/regions'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {	
 	ssr: false,
@@ -48,24 +51,38 @@ const formats = [
 type Props = {}
 
 function CreateNews({}: Props) {
+  const [content,setContent] = useState("<h1>Hello</h1>")
+  const [showNav,setShowNav] = useState(false)
+  const router = useRouter();
   return (
-    <div className='p-4'>
+    <Layout hideNav={showNav} hideFooter={showNav}>
+      <div className='p-4'>
       <div className='flex items-center justify-between'>
-        <input type="text" placeholder='Enter the title' />
-      <div className='space-x-2'>
-        <button>Cancel</button>
-        <button className='btn'>Publish</button>
+        <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' />
+      <div className='space-x-6'>
+        <button onClick={() => setShowNav(!showNav)}>Show Nav</button>
+        
+        <button className='btn' onClick={() => alert(content)}>Publish</button>
       </div>
       </div>
-      <div>
+      <div className='p-2 space-x-4'>
         <select>
-        <option value="">Math</option>
+        {
+          categories.map((cat) => (
+            <option value={cat.title}>{cat.title}</option>
+          ))
+        }
       </select>
       <select>
-        <option value="">Region</option>
+      { 
+          regions.map((cat) => (
+            <option value={cat.title}>{cat.title}</option>
+          ))
+        }
       </select>
       <select>
         <option value="">EN</option>
+        <option value="">NE</option>
       </select>
       </div>
       
@@ -74,9 +91,12 @@ function CreateNews({}: Props) {
         formats={formats} 
         theme="snow"
         placeholder='Write Something Nice Today'
-
+        value={content}
+        onChange={(value) => setContent(value)}
+        className="h-96"
       />
     </div>
+    </Layout>
   )
 }
 

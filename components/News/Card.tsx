@@ -20,14 +20,14 @@ export function NewsCard({title,description,image,imageSize,author,readTime,size
   const date = new Date(publishedAt).toDateString()
   const router = useRouter();
   return (
-    <div className={`flex flex-col ${reverse ? "md:flex-row-reverse":"md:flex-row"} md:space-x-3`}>
-      {image && <Image src={image} width={imageSize ? imageSize:300} height={20} className='object-scale-down' alt="sadsa"/>}
-        <div className='py-2'>
+    <div className={`flex ${reverse ? "md:flex-row-reverse":"md:flex-row"} items-start space-x-3`}>
+      {image && <Image src={image} width={imageSize ? imageSize:300} height={20} className='w-52 h-40 object-cover' alt="sadsa"/>}
+        <div className=''>
           {
             category && <p className='text-green-700'>{category}</p>
           } 
-          <h3 className={`text-xl ${size ? size:" md:text-2xl"} font-semibold ${router.locale == "ne" ? "font-devtitle":"font-title"} hover:underline`}><Link href={"/"}>{title}</Link></h3>
-          {description && <p className='text-gray-500 line-clamp-2 md:line-clamp-4'>{description}</p>}
+          <h3 className={`text-xl ${size ? size:" md:text-2xl"} ${router.locale == "ne" ? "font-devhead":"font-title"} hover:underline`}><Link href={"/"}>{title}</Link></h3>
+          {description && <p className={`text-gray-500 line-clamp-3 md:line-clamp-4 ${router.locale == "ne" ? "font-devbody text-xl mt-2 font-medium leading-5":"font-body"}`}>{description}</p>}
           <p className='text-sm text-gray-500'>{readTime ? readTime:date}{" • "}<Link href={`/by/love`} className="hover:underline">{author && author}</Link></p>
         </div>
     </div>

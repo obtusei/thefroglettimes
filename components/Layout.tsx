@@ -12,10 +12,16 @@ type Props = {
 
 function Layout({children,bg,hideNav,hideFooter}: Props) {
   const [isDark,setDark]= useState(false)
+  const [showSearch,setshowSearch]= useState(false)
   const handleKeyPress = useCallback(
     (event:  globalThis.KeyboardEvent) => {
       if ((event.metaKey === true || event.ctrlKey === true) && event.key === "j") {
+        event.preventDefault();
         setDark(!isDark);
+      }
+      else if((event.metaKey === true || event.ctrlKey === true) && event.key === "s"){
+        event.preventDefault();
+        setshowSearch(!showSearch);
       }
     },
     [isDark]
@@ -32,7 +38,7 @@ function Layout({children,bg,hideNav,hideFooter}: Props) {
     <div className={`${isDark && "dark"} ${bg && bg} font-serif`}>
       <div className=' dark:bg-gray-700 dark:text-white'>
       {
-        hideNav ? <></>:<Navbar changeColor={() => setDark(!isDark)} colorModeIcon={!isDark ? <SunIcon/>:<MoonIcon/>}/>
+        hideNav ? <></>:<Navbar changeColor={() => setDark(!isDark)} colorModeIcon={!isDark ? <SunIcon/>:<MoonIcon/>} openSearchBar={showSearch} setSearchBar={setshowSearch}/>
       }
       {children}
       {

@@ -1,21 +1,26 @@
 import React, { ReactNode, useState } from 'react'
-import { CloseIcon, HamMenu, SearchIcon, SunIcon } from './Icons'
+import { CloseIcon, HamMenu, SearchIcon, SunIcon, SunsetIcon } from './Icons'
 import useTranslation from 'next-translate/useTranslation'
 import Dropdown, { DropdownTwo } from './Dropdown'
 import regions from '../libs/regions'
 import categories from "../libs/categories.json"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 type Props = {
   changeColor: () => void;
   colorModeIcon: ReactNode;
+  openSearchBar:boolean
+  setSearchBar:React.Dispatch<React.SetStateAction<boolean>>
 };
 
-function Navbar({changeColor,colorModeIcon}: Props) {
+function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
   const date = new Date()
+  
+  const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=27.5808256&lon=85.5179264&appid=b0b7a001a8281701c327f0974b36151c`
   const [showMenu,setShowMenu] = useState(false)
-  const [openSearchBar,setSearchBar] = useState(false)
+  // const [openSearchBar,setSearchBar] = useState(showSearch)
   const [region,setRegion] = useState("General")
   const [searchTerm,setSearhTerm] = useState("")
   const router = useRouter();
@@ -107,9 +112,17 @@ function Navbar({changeColor,colorModeIcon}: Props) {
         </ul>
       </div>
       <hr className='border-t-gray-400  mx-5'/>
-      <div className='p-2 py-4 text-center flex justify-center items-center space-x-4'>
+      <div className='px-5 py-4 text-center flex justify-between items-center space-x-4'>
+        <div className='flex items-center space-x-4'>
         <span className='text-red-600 dark:text-blue-200 font-bold text-xs'>LIVE</span>
         <p>Columbia vs Brazil</p>
+        </div>
+        <div className='flex items-center space-x-4'>
+          <SunsetIcon/>
+          <p className='font-bold text-xl'>13°C</p>
+          <p>22°C - 6°C</p>
+        </div>
+
       </div>
       <hr className='border-t-gray-400  mx-5'/>
       <hr className='mt-0.5 border-t-gray-400  mx-5'/>

@@ -18,6 +18,48 @@
     font-display: swap;
     font-style: normal;
   }
+  @font-face {
+    font-family: "Akhand";
+    src: url("/fonts/Akhand_Devanagari_Semibold.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Akhand-Bold";
+    src: url("/fonts/AkhandDevanagari-Extrabold.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Ananda-ktm";
+    src: url("/fonts/ANANDA_DEVANAGARI_KTM.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Ananda-np";
+    src: url("/fonts/ANANDA_DEVANAGARI_NP.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Ananda-round";
+    src: url("/fonts/ANANDA_DEVANAGARI_ROUND.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Shree";
+    src: url("/fonts/SHREE-DV0726-OT_1.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
 }
 @layer components {
   .btn {

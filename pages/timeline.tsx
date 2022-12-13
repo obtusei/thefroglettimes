@@ -4,7 +4,10 @@ type Props = {}
 
 function Timeline({}: Props) {
   return (
-    <div>Timeline</div>
+    <div>
+      
+      
+    </div>
   )
 }
 
