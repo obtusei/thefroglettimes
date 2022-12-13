@@ -35,7 +35,7 @@ function Navbar({ changeColor, colorModeIcon }: Props) {
             <Dropdown title="REGION" items={regions} />
           </div>
         </div>
-        <h1 className="text-center tracking-widest text-sm sm:text-2xl md:text-4xl font-logo">
+        <h1 className="text-center tracking-widest text-sm sm:text-2xl md:text-4xl font-logo cursor-pointer">
           The Froglet Times
         </h1>
         <div className="flex space-x-6">
@@ -53,7 +53,7 @@ function Navbar({ changeColor, colorModeIcon }: Props) {
             <button onClick={changeColor}>{colorModeIcon}</button>
           </div>
           <button
-            onClick={() => handleClick("/login")}
+            onClick={() => handleClick("/auth/login")}
             className="border-2 border-black px-4 dark:border-white hover:dark:bg-white hover:dark:text-black hover:bg-black hover:text-white"
           >
             Login
