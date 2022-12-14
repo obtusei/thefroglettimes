@@ -141,7 +141,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
       <hr className='border-t-gray-400  mx-5'/>
       <div className='px-5 py-4 text-center flex justify-between items-center space-x-4'>
         <div className={`flex items-center space-x-4 ${router.locale == "ne" && "font-devCat"}`}>
-        <span className='text-red-600 dark:text-blue-200 font-bold text-xs'>{t("live")}</span>
+        <span className='text-red-600 dark:text-blue-200 font-bold text-lg'>{t("live")}</span>
         {
           router.locale === "en" ? livenews.en.map((content,index) => (
             <p className={`pr-2 ${livenews.ne.length != index+1 && "border-r-2"}`} key={index}>{content.title}</p>

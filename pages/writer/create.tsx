@@ -69,9 +69,11 @@ function CreateNews({}: Props) {
     <Layout hideNav={showNav} hideFooter={showNav}>
       <div className='p-4'>
       {/* {djyango ? JSON.stringify(djyango):"login"} */}
-      <div className='flex items-center justify-between'>
-        <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' value={title} onChange={(e) => setTitle(e.target.value)} />
-        <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+      <div className='flex items-start justify-between'>
+        <div className='w-full'>
+        <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' value={title} onChange={(e) => setTitle(e.target.value)} /><br/><br />
+        <input type="text" className='text-xl border-2 w-1/2 p-2'  placeholder='Enter the image url' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+        </div>
       <div className='space-x-6 flex items-center'>
         <button onClick={() => setShowNav(!showNav)}>{!showNav ? <FullScreenIcon/>:<ExitFullScreenIcon/>}</button>
         

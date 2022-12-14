@@ -51,7 +51,7 @@ function Section({}: Props) {
               news ? news?.map((content:any,index:any)=> (
                 <div key={index} className='col-span-4 md:col-span-2'>
                   <ModernNewsCard 
-                    id={content.title}
+                    id={content.id}
                     title={content.title}
                     description={content.content}
                     author={content.author}
@@ -71,7 +71,7 @@ function Section({}: Props) {
               news ? news.map((content:any,index:any)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
                   <ModernNewsCard
-                    id={content.title} 
+                    id={content.id} 
                     title={content.title}
                     description={content.content}
                     image={content.imageUrl}
@@ -80,7 +80,9 @@ function Section({}: Props) {
                 </div>
               )):<></>
             }
+            <div className="mb-52">
             <RectangleAd/>
+            </div>
             </div>
           </div>
         </div>

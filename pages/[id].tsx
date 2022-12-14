@@ -7,7 +7,7 @@ import news from "../libs/news.json"
 import Link from 'next/link'
 import { CheckIcon, InfoIcon } from '../components/Icons'
 import { title } from 'process'
-import { SpecificNews } from '../utils/newsapi'
+import { MainPageNews, SpecificNews } from '../utils/newsapi'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 
@@ -20,6 +20,8 @@ type Props = {}
 function News({}: Props) {
   const fontSizes = ['xs','sm','md','lg','xl','2xl','3xl','4xl']
   const [bgColor,setBgColor] = useState('bg-white')
+  const router = useRouter()
+  const {news:breakingNews} = MainPageNews({tag:"breaking",take:4,language:router.locale?.toUpperCase()})
   const colors = [
     {
       title:'Plain White',
@@ -43,7 +45,6 @@ function News({}: Props) {
   const [fontSize,setFontSize] = useState(3)
   const fonts:any = [{title:'Sans',handle:() => setFont('font-sans')},{title:'Serif',handle:() => setFont('font-serif')},{title:'Mono',handle:() => setFont('font-mono')}]
   const [font,setFont] = useState('Serif')
-  const router = useRouter()
   const {news:newsData} = SpecificNews(String(router.query.id))
   return (
     <Layout bg={bgColor}>
@@ -86,25 +87,24 @@ function News({}: Props) {
         {/* ----------------------- ARKO SECTION ------------------------- */}
         <div className='p-2 col-span-3 md:col-span-1'>
           <RectangleAd/>
-          <h3 className='text-2xl font-bold mt-52'>Related News</h3>
+          <h3 className='text-2xl font-bold mt-56'>Related News</h3>
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-1'>
             {
-              news.map((content,index) => (
+              breakingNews ? breakingNews.map((content:any,index:number) => (
                 <div key={index} className=''>
                   <ModernNewsCard
-                    id={content.title}
-                    image={content.image}
+                    id={content.id}
+                    image={content.imageUrl}
                     title={content.title}
-                    description={content.description}
-                    publishedAt={content.published_at}
+                    description={content.content}
+                    publishedAt={content.publishedAt}
                     author={content.author}
-                    imageSize={200}
                   />
                   {
                     index != 2 && <hr />
                   }
                 </div>
-              ))
+              )):<></>
             }
           </div>
         </div>
