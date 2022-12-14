@@ -6,7 +6,7 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['s.abcnews.com','imagez.tmz.com','a4.espncdn.com','en.wikipedia.org','upload.wikimedia.org','www.hamropatro.com'],
+    domains: ['s.abcnews.com','dummyimage.com','imagez.tmz.com','a4.espncdn.com','en.wikipedia.org','upload.wikimedia.org','www.hamropatro.com'],
   },
 //  pwa: {
 //    dest: 'public',

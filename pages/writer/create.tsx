@@ -75,18 +75,7 @@ function CreateNews({}: Props) {
         
         <button className='btn' onClick={() => {
           if (session){
-            // createNews({title,content,category,imageUrl:"",region,language,userEmail:session.user?.email})
-            createNewsDjango({
-              title:title,
-              thumbnail:"",
-              author:"1",
-              content:content,
-              category:'2',
-              region:'3',
-              reading_time:12,
-              language:language,
-              section:"breaking"
-            })
+            createNews({title,content,category,imageUrl:"",region,language,userEmail:session.user?.email})
             alert("Article Created Successfully")
           }
         }}>Publish</button>

@@ -9,10 +9,18 @@ import Link from 'next/link'
 import horoscope from "../libs/zodiac.json"
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
+import { MainPageNews } from '../utils/newsapi'
 export default function Home() {
   const router = useRouter();
   const news = router.locale == "en" ? ennews:nenews
   const {t} = useTranslation("common")
+  const {news:breakingNews} = MainPageNews({tag:"breaking",take:4,language:router.locale?.toUpperCase()})
+  const {news:headlines} = MainPageNews({tag:"headlines",take:4,language:router.locale?.toUpperCase()})
+  const {news:mainNews} = MainPageNews({tag:"main",take:1,language:router.locale?.toUpperCase()})
+  const {news:international} = MainPageNews({tag:"international",take:6,language:router.locale?.toUpperCase()})
+  const {news:classified} = MainPageNews({tag:"classified",take:3,language:router.locale?.toUpperCase()})
+  const {news:general} = MainPageNews({tag:"breaking",take:6,language:router.locale?.toUpperCase()})
+  
   return (
     <Layout>
       <Head>
@@ -27,39 +35,36 @@ export default function Home() {
       <div className='grid grid-cols-3'>
         <div className='col-span-3 md:col-span-1 md:border-b-2 md:border-r-2 md:border-gray-300 md:mr-2 h-full'>
           {
-            news.map((content,index) => (
+            breakingNews ? breakingNews.map((content:any,index:any) => (
               <div key={index} className='p-2'>
                 <NewsCard 
                     title={content.title}
-                    description={content.description}
-                    author={content.author}
-                    readTime={'9 mins'}
-                    publishedAt={content.published_at}
+                    description={content.content}
+                    author={""}
+                    readTime={`${content.reading_time} mins`}
+                    publishedAt={new Date(content.publishedAt).toDateString()}
                     />
                 {
-                  news.length != index+1 && <hr/>
+                  breakingNews.length != index+1 && <hr/>
                 }
               </div>
-            ))
+            )):<>Loading...</>
           }
         </div>
         
-        <div className='col-span-3 md:col-span-2'>
+        {
+          mainNews ? 
+          <div className='col-span-3 md:col-span-2'>
           <Image src={"/img.webp"} width={800} height={200} alt="sadsa"/>
-          <p className='font-bold'>This image content domestic violence happening in our society right now.</p>
+          {/* <p className='font-bold'>{main.title}</p> */}
           <hr/>
           <div className='py-2'>
-            <h3 className='text-2xl font-bold font-title'>The Chinese Dream, Denied: Harsh Measures Shake Beijing’s Social Contract</h3>
-            <p className='text-gray-500 line-clamp-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias! Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!
-            
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, necessitatibus sint, nobis fuga voluptates placeat rerum exercitationem voluptate dignissimos magnam sapiente sequi! Itaque ipsam repellat, asperiores possimus provident pariatur alias!</p>
-            <p className='text-sm text-gray-500'>9 MIN READ • By Simon Thapa</p>
+            <h3 className='text-2xl font-bold font-title'>{mainNews[0].title}</h3>
+            <p className='text-gray-500 line-clamp-6'>{mainNews[0].content}</p>
+            <p className='text-sm text-gray-500'>{mainNews[0].readingTime} mins</p>
           </div>
-        </div>
+        </div>:<>Loading...</>
+        }
         <div className='col-span-3 py-2'>
           <LeaderboardAd m/>
         </div>
@@ -69,11 +74,11 @@ export default function Home() {
       <h3 className={`text-2xl font-bold ${router.locale == "en" ? "":"font-devhead"}`}>{t("todayHeadline")}</h3>
         <div className='grid grid-cols-3 md:grid-cols-1'>
           {
-            news.map((content,index) => (
+            headlines ? headlines.map((content:any,index:number) => (
               <div key={index} className="col-span-3 sm:col-span-2 md:col-span-1 p-1">
                 <NewsCard 
                     title={content.title}
-                    image={content.image}
+                    image={content.imageUrl}
                     author={content.author}
                     readTime={'9 mins'}
                     imageSize={150}
@@ -82,7 +87,7 @@ export default function Home() {
                     />
                 <hr />
               </div>
-            ))
+            )):<>Loading...</>
           }
           <div className='col-span-3 md:col-span-1'>
             <div className='hidden md:block'><WideSkyscrapersAd/></div>
@@ -148,18 +153,18 @@ export default function Home() {
       <h3 className={`text-2xl hover:underline ${router.locale == "ne" && "font-devhead"}`}><Link href={"/international"}>{t("international")}</Link></h3>
         <div className='grid grid-cols-3 gap-4 px-2 pb-2'>
             {
-              news.map((content,index)=> (
+              international ? international.map((content:any,index:number)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
                   <NewsCardWithImageTop 
                     title={content.title}
-                    description={content.description}
+                    description={content.content}
                     author={content.author}
-                    image={content.image}
+                    image={content.imageUrl}
                     publishedAt={content.published_at}
                     imageSize={250}
                     />
                 </div>
-              ))
+              )):<>...</>
             }
           </div>
       </div>
@@ -170,18 +175,18 @@ export default function Home() {
 
         <div className='grid grid-cols-3 gap-4 px-2'>
             {
-              news.map((content,index)=> (
+              classified ? classified.map((content:any,index:number)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
                   <NewsCardWithImageTop
                     title={content.title}
-                    description={content.description}
+                    description={content.content}
                     author={content.author}
-                    image={content.image}
+                    image={content.imageUrl}
                     publishedAt={content.published_at}
                     imageSize={250}
                     />
                 </div>
-              ))
+              )):<>...</>
             }
           </div>
       </div>
@@ -196,18 +201,18 @@ export default function Home() {
           <div className='grid grid-cols-4 gap-4 pt-2'>
             
             {
-              news.map((content,index)=> (
+              general ? general.map((content:any,index:any)=> (
                 <div key={index} className='col-span-4 md:col-span-2'>
                   <ModernNewsCard 
                     title={content.title}
-                    description={content.description}
-                    image={content.image}
+                    description={content.content}
+                    image={content.imageUrl}
                     author={content.author}
                     publishedAt={content.published_at}
                     category={content.category}
                     />
                 </div>
-              ))
+              )):<>...</>
             }
             <div className='col-span-2'>
               

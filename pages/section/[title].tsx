@@ -1,12 +1,13 @@
 import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import { LeaderboardAd, RectangleAd, WideSkyscrapersAd } from '../../components/Ads'
+import { LeaderboardAd, LeaderboardAd2, RectangleAd, WideSkyscrapersAd } from '../../components/Ads'
 import Layout from '../../components/Layout'
 import { ModernNewsCard, NewsCard, NewsCardWithImageTop } from '../../components/News/Card'
 import { MONTHS } from '../../libs/filterStuff'
-import news from "../../libs/news.json"
+// import news from "../../libs/news.json"
 import regions from '../../libs/regions'
+import { GetByCategory } from '../../utils/newsapi'
 type Props = {}
 
 function capitalizeFirstLetter(str:string) {
@@ -22,8 +23,10 @@ function Section({}: Props) {
   const [day,setDay] = useState(date.getDate())
   const [region,setRegion] = useState("General")
   const {t} = useTranslation("common")
+  const {news} = GetByCategory({cat:title,take:4,language:router.locale?.toUpperCase()})
   return (
     <Layout>
+      <LeaderboardAd2/>
       <div className='p-5'>
         <h2 className='text-4xl'>{title}</h2>
         <hr />
@@ -31,6 +34,7 @@ function Section({}: Props) {
           <div className='col-span-3 md:col-span-2 md:border-r-2 border-black'>
             <div className='grid grid-cols-1 gap-2 px-2'>
               <NewsCardWithImageTop
+                id='"addas'
                 title='Something goes here pani at the bottom of the image'
                 description='Lorem Ipsum'
                 image='/img.webp'
@@ -38,18 +42,18 @@ function Section({}: Props) {
                 />
               <div className='grid grid-cols-4 gap-3'>
               {
-              news.map((content,index)=> (
+              news ? news?.map((content:any,index:any)=> (
                 <div key={index} className='col-span-4 md:col-span-2'>
                   <ModernNewsCard 
+                    id={content.title}
                     title={content.title}
-                    description={content.description}
+                    description={content.content}
                     author={content.author}
-                    image={content.image}
+                    image={content.imageUrl}
                     publishedAt={content.published_at}
-                    imageSize={250}
                     />
                 </div>
-              ))
+              )):<></>
             }
               </div>
             </div>
@@ -57,18 +61,18 @@ function Section({}: Props) {
           <div className='col-span-3 md:col-span-1 p-2'>
             <div className='grid grid-cols-1 gap-2'>
               {
-              news.map((content,index)=> (
+              news ? news.map((content:any,index:any)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
-                  <ModernNewsCard 
+                  <ModernNewsCard
+                    id={content.title} 
                     title={content.title}
                     description={content.description}
                     author={content.author}
-                    image={content.image}
+                    image={content.imageUrl}
                     publishedAt={content.published_at}
-                    imageSize={150}
                     />
                 </div>
-              ))
+              )):<></>
             }
             <RectangleAd/>
             </div>

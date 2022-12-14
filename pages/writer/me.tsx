@@ -5,34 +5,44 @@ import nenews from "../.../../../libs/nenews.json"
 import { NewsCard } from '../../components/News/Card'
 import Dropdown from '../../components/Dropdown'
 import Image from 'next/image'
+import { GetSession } from '../../utils/userapi'
+import { useRouter } from 'next/router'
 type Props = {}
 
 function WriterProfile({}: Props) {
   const [lang,setLang] = useState("EN")
+  const router = useRouter()
+  const {userSession} = GetSession(true);
+  // if (!userSession){
+  //   router.push("/")
+  // }
   return (
     <Layout>
       <div className='p-5'>
         <div>
-        <Image src={"/img.webp"} width={400} height={40} className="w-20 h-20 object-cover rounded-full" alt='Avatar'/>
-        <h1 className='text-3xl'>Abhishek bhatta</h1>
-        <h3 className='text-gray-500 dark:text-gray-300'>abhishekbhatta@gmail.com</h3>
+        {
+          userSession && userSession.imageUrl == "" ? <Image src={userSession.imageUrl} width={400} height={40} className="w-20 h-20 object-cover rounded-full" alt='Avatar'/>:<></>
+        }
+        <h1 className='text-3xl'>{userSession ? userSession.fullname:""}</h1>
+        <h3 className='text-gray-500 dark:text-gray-300'>{userSession ? userSession.bio:""}</h3>
+        <h3 className='text-gray-500 dark:text-gray-300'>{userSession ? userSession.email:""}</h3>
         </div>
 
         <div className='border-t-2 border-gray-400 mt-2 p-2'>
           
           <div className='flex items-center'>
             <h2 className='text-2xl'>Articles</h2>
-            <Dropdown title={lang} items={[{title:"EN",handle:() => setLang("EN")},{title:"NE",handle:() => setLang("NE")}]}/>
           </div>
           {
-            lang === "EN" ?
-            ennews.map((content,index) => (
+            userSession ? userSession.Article.map((content:any,index:any) => (
               <div key={index} className="col-span-3 sm:col-span-2 md:col-span-1 p-1">
                 <NewsCard 
+                    id={content.id}
                     title={content.title}
-                    image={content.image}
+                    description={content.content}
+                    image={content.imageUrl}
                     author={content.author}
-                    readTime={'9 mins'}
+                    readTime={`${content.readTime || "0"} mins`}
                     imageSize={150}
                     size={"md:text-xl"}
                     publishedAt={content.published_at}
@@ -40,20 +50,7 @@ function WriterProfile({}: Props) {
                 <hr />
               </div>
             )):
-            nenews.map((content,index) => (
-              <div key={index} className="col-span-3 sm:col-span-2 md:col-span-1 p-1">
-                <NewsCard 
-                    title={content.title}
-                    image={content.image}
-                    author={content.author}
-                    readTime={'9 mins'}
-                    imageSize={150}
-                    size={"md:text-xl"}
-                    publishedAt={content.published_at}
-                    />
-                <hr />
-              </div>
-            ))
+            <></>
           }
         </div>
       </div>

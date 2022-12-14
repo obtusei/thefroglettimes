@@ -40,17 +40,9 @@ async function createNews(){
             publishedAt:content.publishedAt,
             updatedAt:content.updatedAt,
             tag:content.tag,
-            readingTime:content.readingTime,
-            author:{
-                connect:{
-                    email:users[urandom].email
-                }
-            },
-            category:{
-                connect:{
-                    title:categoriesN[crandom].title
-                }
-            }
+            readingTime:String(content.readingTime),
+            authorEmail:users[urandom].email,
+            categoryId:categoriesN[crandom].id
 
             
 
@@ -78,15 +70,15 @@ async function main() {
 //   await prisma.user.createMany({data:newUsers});
 //   await prisma.blog.createMany({data:newBlogs});
 
-// const newCategories = await Promise.all(categories.map(async (cat) => cat ={
-//     title:cat.title,
-//     href:cat.href,
-//     ne:cat.ne
-// }))
+const newCategories = await Promise.all(categories.map(async (cat) => cat ={
+    title:cat.title,
+    href:cat.href,
+    ne:cat.ne
+}))
 
-// await prisma.category.createMany({data:newCategories})
+    await prisma.category.createMany({data:newCategories})
     // await createNewUsers();
-    await createNews();
+    // await createNews();
 
 }
 

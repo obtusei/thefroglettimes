@@ -8,6 +8,14 @@ export const LeaderboardAd = ({m}:{m?:boolean}) => {
   )
 }
 
+export const LeaderboardAd2 = ({m}:{m?:boolean}) => {
+  return (
+    <div className={` h-24 ${!m && "m-4"} flex items-center justify-center text-3xl text-white`}>
+      <Image src={"/leaderAd2.gif"} width={400} height={40} className={`w-full h-30`} alt="ADS"/>
+    </div>
+  )
+}
+
 export const WideSkyscrapersAd = () => {
   return (
     <div className='bg-green-500 h-96 m-4 flex items-center justify-center text-3xl text-white'>ADS</div>
@@ -16,7 +24,9 @@ export const WideSkyscrapersAd = () => {
 
 export const RectangleAd = () => {
   return (
-    <div className='bg-yellow-500 h-60 m-4 text-center text-3xl text-white'>ADS</div>
+    <div className='bg-yellow-500 h-60 m-4 text-center text-3xl text-white'>
+      <Image src={"/SquareAd.jpg"} width={400} height={40} className={`w-full h-30`} alt="ADS"/>
+    </div>
   )
 }
 

@@ -55,9 +55,9 @@ export default function Login() {
             <input type="password" name="" id="password" className="search w-full" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
           </div>
           <button type="submit" className="btn w-full" onClick={() => {
-            loginTheUser({password:password,username:email})
+            // loginTheUser({password:password,username:email})
 
-            // signIn("credentials", { username: email, password: password,callbackUrl:"/" })
+            signIn("credentials", { username: email, password: password,callbackUrl:"/" })
           }}>{t("loginButton")}</button>
           <p className="text-center">{t("notAMember")}{" "}<Link href={"/signup"} className="text-green-700">{t("signup")}</Link></p>
 

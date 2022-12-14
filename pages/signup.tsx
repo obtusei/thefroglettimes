@@ -29,7 +29,7 @@ export default function SignUp() {
             if (data.message){
               alert(data.message)
             }else{
-              router.push("/")
+              router.push("/login")
             }
         })
         .catch((error) => {
@@ -71,8 +71,8 @@ export default function SignUp() {
             {/* <p className="text-red-600">{(t("loginError"))}</p> */}
           </div>
           <button type="submit" className="btn w-full" onClick={() => {
-              // postRequest();
-            registerTheUser({password:password,password2:password,username:username,full_name:fullName})
+              postRequest();
+            // registerTheUser({password:password,password2:password,username:username,full_name:fullName})
             alert("USER SUCCESSFULL CREATED");
             router.push("/login")
           }}>{t("signup")}</button>
