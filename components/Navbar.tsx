@@ -33,14 +33,13 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
   // },[weatherURL])
   
   const [showMenu,setShowMenu] = useState(false)
-  // const [openSearchBar,setSearchBar] = useState(showSearch)
-  const [region,setRegion] = useState("General")
-  const [searchTerm,setSearhTerm] = useState("")
   const router = useRouter();
+  // const [openSearchBar,setSearchBar] = useState(showSearch)
+  const [region,setRegion] = useState(router.locale == "en" ? "General":"सामान्य")
+  const [searchTerm,setSearhTerm] = useState("")
   const { t, lang } = useTranslation('common')
   const {data:session} = useSession();
   const {userSession} = GetSession();
-  const {userSession:djyango} = GetSessionDjango();
   const searchButton = <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
   const handleClick = (path: string) => {
     router.push(path);
@@ -64,7 +63,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
                 {
                   regions.map((region,index) => (
                     <li key={index} className="block py-2 px-4 w-full uppercase hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                      <Link href={`?region=${region.title}`} shallow>{region.title}</Link>
+                      <Link href={`?region=${region.title}`} shallow>{router.locale === "en" ? region.title:region.ne}</Link>
                     </li>
                   ))
                 }
@@ -111,19 +110,19 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
           {colorModeSwitch}
           </div>
           {
-            djyango ? <Dropdown 
-            title={djyango.first_name}
+            userSession ? <Dropdown 
+            title={userSession?.fullname}
             items={[
               {title:"Profile",handle:() => router.push("/writer/me")},
               {title:"Create",handle:() => router.push("/writer/create")},
-              {title:"Logout",handle:() => {Logout();deleteCookie('froglettimes')}},
+              {title:"Logout",handle:() => {signOut()}},
               ]}
           />:
           <button
             onClick={() => handleClick("/login")}
             className="border-2 border-black px-4 dark:border-white hover:dark:bg-white hover:dark:text-black hover:bg-black hover:text-white"
           >
-            Login
+            {t("login")}
           </button>
           }
         </div>
@@ -133,7 +132,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
         <ul className='flex flex-wrap space-x-4 justify-center items-center '>
           {
             categories ? categories.map((cat:any,index:number) => (
-              <li key={index} className={`hover:text-green-700 ${router.locale === "ne" && "font-devCat"}`}><Link href={`/section/${cat.id}`}>{router.locale == "en" && cat.category}</Link></li>
+              <li key={index} className={`hover:text-green-700 ${router.locale === "ne" && "font-devCat"}`}><Link href={cat.href}>{router.locale == "en" ? cat.title:cat.ne}</Link></li>
             )):
             <li></li>
           }
@@ -145,9 +144,9 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
         <span className='text-red-600 dark:text-blue-200 font-bold text-xs'>{t("live")}</span>
         {
           router.locale === "en" ? livenews.en.map((content,index) => (
-            <p className={`pr-2 ${livenews.ne.length != index+1 && "border-r-2"}`}>{content.title}</p>
+            <p className={`pr-2 ${livenews.ne.length != index+1 && "border-r-2"}`} key={index}>{content.title}</p>
           )): livenews.ne.map((content,index) => (
-            <p className={`pr-2  ${livenews.ne.length != index+1 && "border-r-2"}`}>{content.title}</p>
+            <p key={index} className={`pr-2  ${livenews.ne.length != index+1 && "border-r-2"}`}>{content.title}</p>
           ))
         }
         </div>
@@ -175,7 +174,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
           <ul>
             {
               categories ? categories.map((cat:any,index:number) => (
-                <li key={index} className="hover:text-green-700 hover:dark:text-green-400"><Link href={`/section/${cat.id}`}>{router.locale == "en" && cat.category}</Link></li>
+                <li key={index} className="hover:text-green-700 hover:dark:text-green-400"><Link href={`/section/${cat.id}`}>{router.locale == "en" ? cat.title:cat.ne}</Link></li>
               )):<>...</>
             }
           </ul>

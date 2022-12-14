@@ -26,17 +26,20 @@ export default async function handler(
               }
             },
             {
-              language:{
-                equals:(req.query.lang as Language)
-              }
-            },
-            {
               tag:{
                 equals:String(req.query.tag)
               }
             }
+          ],
+          AND:[
+            {
+              language:{
+                equals:(req.query.lang as Language)
+              }
+            }
           ]
-        }
+        },
+        
       })
       res.status(200).json(news)
     

@@ -12,6 +12,9 @@ export default async function handler(
         const user = await prisma.user.findUnique({
             where:{
                 email:String(session?.user?.email)
+            },
+            include:{
+                Article:Boolean(req.query.article) || false
             }
         })
         res.json(user)

@@ -43,6 +43,7 @@ export default async function handler(
       const newCategory = await prisma.category.create({
         data:{
           title:req.body.title,
+          ne:req.body.ne,
           href:req.body.href
         }
       }) 

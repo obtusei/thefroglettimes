@@ -5,10 +5,10 @@ import { getCookie, setCookie } from 'cookies-next';
 const url =  "https://djangohosting.pythonanywhere.com/api"
 const fetcher = (url:string)=> axios.get(url).then(res => res.data)
 
-export const GetSession = () => {
-    const { data, error } = useSWR(`/api/user/session`, fetcher)
+export const GetSession = (article?:boolean) => {
+    const { data, error } = useSWR(`/api/user/session?article=${article}`, fetcher)
     return {
-      userSession:data,
+      userSession:data?.error ? null:data,
       isLoading: !error && !data,
       isError:error
     }

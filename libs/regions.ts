@@ -2,39 +2,39 @@
 const regions =  [
   {
     title:"General",
-    action:() => alert("asds")
+    ne:"सामान्य",
   },
   {
     title:"International",
-    action:() => alert("asds")
+    ne:"अन्तर्राष्ट्रिय",
   },
   {
     title:"Province 1",
-    action:() => alert("asds")
+    ne:"प्रदेश १",
   },
   {
     title:"Madhesh",
-    action:() => alert("asds")
+    ne:"मधेस",
   },
   {
     title:"Bagmati",
-    action:() => alert("asds")
+    ne:"बागमती",
   },
   {
     title:"Gandaki",
-    action:() => alert("asds")
+    ne:"गण्डकी",
   },
   {
     title:"Lumbini",
-    action:() => alert("asds")
+    ne:"लुम्बिनी",
   },
   {
     title:"Karnali",
-    action:() => alert("asds")
+    ne:"कर्णाली",
   },
   {
     title:"Sudurpashchim",
-    action:() => alert("asds")
+    ne:"सुदूरपश्चिम",
   },
 ]
 

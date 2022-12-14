@@ -6,7 +6,12 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['s.abcnews.com','imagez.tmz.com','a4.espncdn.com','en.wikipedia.org','upload.wikimedia.org','www.hamropatro.com'],
+     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 //  pwa: {
 //    dest: 'public',

@@ -29,7 +29,7 @@ export default function SignUp() {
             if (data.message){
               alert(data.message)
             }else{
-              router.push("/")
+              router.push("/login")
             }
         })
         .catch((error) => {
@@ -42,10 +42,12 @@ export default function SignUp() {
     }
   }
   const router = useRouter()
-  const {data:session} = useSession();
-  if (session){
+  const {data:session,status} = useSession();
+  if (status === "loading"){
+    return <></>
+  }else if(status === "authenticated"){
     router.push("/")
-  }
+  }else{
   return (
     <Layout hideFooter hideNav>
       <div className="flex font-serif flex-col justify-center items-center h-screen">
@@ -71,8 +73,8 @@ export default function SignUp() {
             {/* <p className="text-red-600">{(t("loginError"))}</p> */}
           </div>
           <button type="submit" className="btn w-full" onClick={() => {
-              // postRequest();
-            registerTheUser({password:password,password2:password,username:username,full_name:fullName})
+              postRequest();
+            // registerTheUser({password:password,password2:password,username:username,full_name:fullName})
             alert("USER SUCCESSFULL CREATED");
             router.push("/login")
           }}>{t("signup")}</button>
@@ -82,4 +84,5 @@ export default function SignUp() {
     </div>
     </Layout>
   )
+  } 
 }
