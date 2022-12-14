@@ -24,7 +24,7 @@ function Layout({children,bg,hideNav,hideFooter}: Props) {
         setshowSearch(!showSearch);
       }
     },
-    [isDark]
+    [isDark,showSearch]
   );
   useEffect(()=> {
      document.addEventListener('keydown', handleKeyPress);

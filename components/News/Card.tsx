@@ -2,6 +2,7 @@ import React from 'react'
 import Image from "next/image"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ConvertTime } from '../../libs/timeConvert'
 
 type Props = {
   id:string,
@@ -29,13 +30,13 @@ export function NewsCard({id,title,description,image,imageSize,author,readTime,s
           } 
           <h3 className={`text-xl ${size ? size:" md:text-2xl"} ${router.locale == "ne" ? "font-devhead":"font-title"} hover:underline`}><Link href={`/${id}`}>{title}</Link></h3>
           {description && <p className={`text-gray-500 line-clamp-3 md:line-clamp-4 ${router.locale == "ne" ? "font-devbody text-xl mt-2 font-medium leading-5":"font-body"}`}>{description}</p>}
-          {/* <p className='text-sm text-gray-500'>{readTime ? readTime:date}{" • "}<Link href={`/by/love`} className="hover:underline">{author && author}</Link></p> */}
+          <p className='text-sm text-gray-500'>{readTime ? readTime:date}{" • "}<Link href={`/by/love`} className="hover:underline">{author && author}</Link></p>
         </div>
     </div>
   )
 }
 
-export function ModernNewsCard({title,description,image,imageSize,author,readTime,size,publishedAt,category,reverse}: Props) {
+export function ModernNewsCard({title,description,image,imageSize,author,readTime,size,publishedAt,category,reverse,id}: Props) {
   const date = new Date(publishedAt).toDateString()
   const router = useRouter();
   return (
@@ -46,15 +47,15 @@ export function ModernNewsCard({title,description,image,imageSize,author,readTim
           {
             category && <p className='text-green-700'>{category}</p>
           } 
-          <h3 className={`text-xl ${size ? size:" md:text-xl"} ${router.locale == "ne" ? "font-devhead":"font-title"} hover:underline`}><Link href={"/"}>{title}</Link></h3>
+          <h3 className={`text-xl ${size ? size:" md:text-xl"} ${router.locale == "ne" ? "font-devhead":"font-title"} hover:underline`}><Link href={`/${id}`}>{title}</Link></h3>
           {description && <p className={`text-gray-500 line-clamp-3 md:line-clamp-4 ${router.locale == "ne" ? "font-devbody text-xl mt-2 font-medium leading-5":"font-body"}`}>{description}</p>}
-          <p className='text-sm text-gray-500'>{readTime ? readTime:date}{" • "}<Link href={`/by/love`} className="hover:underline">{author && author}</Link></p>
+          {/* <p className='text-sm text-gray-500'>{readTime ? readTime:date}{" • "}<Link href={`/by/love`} className="hover:underline">{author && author}</Link></p> */}
         </div>
     </div>
   )
 }
 
-export function NewsCardWithImageTop({title,description,image,imageSize,author,readTime,size,publishedAt,category}: Props) {
+export function NewsCardWithImageTop({id,title,description,image,imageSize,author,readTime,size,publishedAt,category}: Props) {
   const date = new Date(publishedAt).toDateString()
   return (
     <div className='grid grid-cols-1'>
@@ -63,7 +64,7 @@ export function NewsCardWithImageTop({title,description,image,imageSize,author,r
           {
             category && <p className='text-green-700'>{category}</p>
           } 
-          <h3 className={`text-xl ${size ? size:" md:text-2xl"} font-bold font-title hover:underline`}><Link href={"/"}>{title}</Link></h3>
+          <h3 className={`text-xl ${size ? size:" md:text-2xl"} font-bold font-title hover:underline`}><Link href={`/${id}`}>{title}</Link></h3>
           {description && <p className='text-gray-500 line-clamp-2 md:line-clamp-4'>{description}</p>}
           <p className='text-sm text-gray-500'>{readTime ? readTime:date}{" • "}<Link href={`/by/love`} className="hover:underline">{author && author}</Link></p>
         </div>
