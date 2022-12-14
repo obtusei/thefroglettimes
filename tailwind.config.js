@@ -15,9 +15,10 @@ module.exports = {
         tag:['EB Garamond','serif'],
         logo:['Chomsky','serif'],
         devlogo:[ 'Akhand-Bold', 'serif'],
-        devhead:['Akhand-Bold','serif'],
+        devhead:['Khand','serif'],
         devtitle:['Akhand','serif'],
-        devbody:['Shree','serif'],
+        devbody:['Mukta','serif'],
+        devCat:['Poppins','serif']
         // logo:['Vast Shadow', 'cursive']
       }
     },

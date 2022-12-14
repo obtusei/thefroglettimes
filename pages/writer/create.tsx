@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import regions from '../../libs/regions'
-import { createNews } from '../../utils/userapi'
+import { createNews, createNewsDjango, GetSessionDjango } from '../../utils/userapi'
 import { useSession } from 'next-auth/react'
 import { GetCategories } from '../../utils/newsapi'
 import { ExitFullScreenIcon, FullScreenIcon } from '../../components/Icons'
@@ -63,9 +63,11 @@ function CreateNews({}: Props) {
   const [showNav,setShowNav] = useState(false)
   const {categories} = GetCategories();
   const {data:session} = useSession();
+  // const {userSession:djyango} = GetSessionDjango();
   return (
     <Layout hideNav={showNav} hideFooter={showNav}>
       <div className='p-4'>
+      {/* {djyango ? JSON.stringify(djyango):"login"} */}
       <div className='flex items-center justify-between'>
         <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' value={title} onChange={(e) => setTitle(e.target.value)} />
       <div className='space-x-6 flex items-center'>
@@ -73,7 +75,18 @@ function CreateNews({}: Props) {
         
         <button className='btn' onClick={() => {
           if (session){
-            createNews({title,content,category,imageUrl:"",region,language,userEmail:session.user?.email})
+            // createNews({title,content,category,imageUrl:"",region,language,userEmail:session.user?.email})
+            createNewsDjango({
+              title:title,
+              thumbnail:"",
+              author:"1",
+              content:content,
+              category:'2',
+              region:'3',
+              reading_time:12,
+              language:language,
+              section:"breaking"
+            })
             alert("Article Created Successfully")
           }
         }}>Publish</button>

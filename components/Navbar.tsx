@@ -9,7 +9,9 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { GetCategories } from '../utils/newsapi'
 import { signOut, useSession } from 'next-auth/react'
-import { GetSession } from '../utils/userapi'
+import { GetSession, GetSessionDjango, Logout } from '../utils/userapi'
+import dynamic from 'next/dynamic'
+import { deleteCookie } from 'cookies-next'
 
 type Props = {
   changeColor: () => void;
@@ -38,6 +40,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
   const { t, lang } = useTranslation('common')
   const {data:session} = useSession();
   const {userSession} = GetSession();
+  const {userSession:djyango} = GetSessionDjango();
   const searchButton = <button onClick={() => setSearchBar(true)}><SearchIcon/></button>
   const handleClick = (path: string) => {
     router.push(path);
@@ -108,12 +111,12 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
           {colorModeSwitch}
           </div>
           {
-            session ? <Dropdown 
-            title={userSession.fullname}
+            djyango ? <Dropdown 
+            title={djyango.first_name}
             items={[
               {title:"Profile",handle:() => router.push("/writer/me")},
               {title:"Create",handle:() => router.push("/writer/create")},
-              {title:"Logout",handle:() => signOut()},
+              {title:"Logout",handle:() => {Logout();deleteCookie('froglettimes')}},
               ]}
           />:
           <button
@@ -130,7 +133,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
         <ul className='flex flex-wrap space-x-4 justify-center items-center '>
           {
             categories ? categories.map((cat:any,index:number) => (
-              <li key={index} className="hover:text-green-700"><Link href={cat.href}>{router.locale == "en" ? cat.title:cat.ne}</Link></li>
+              <li key={index} className={`hover:text-green-700 ${router.locale === "ne" && "font-devCat"}`}><Link href={`/section/${cat.id}`}>{router.locale == "en" && cat.category}</Link></li>
             )):
             <li></li>
           }
@@ -138,13 +141,13 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
       </div>
       <hr className='border-t-gray-400  mx-5'/>
       <div className='px-5 py-4 text-center flex justify-between items-center space-x-4'>
-        <div className='flex items-center space-x-4'>
+        <div className={`flex items-center space-x-4 ${router.locale == "ne" && "font-devCat"}`}>
         <span className='text-red-600 dark:text-blue-200 font-bold text-xs'>{t("live")}</span>
         {
-          router.locale === "en" ? livenews.en.map((content) => (
-            <p className={`pr-2  border-r-2`}>{content.title}</p>
-          )): livenews.ne.map((content) => (
-            <p className={`pr-2  border-r-2`}>{content.title}</p>
+          router.locale === "en" ? livenews.en.map((content,index) => (
+            <p className={`pr-2 ${livenews.ne.length != index+1 && "border-r-2"}`}>{content.title}</p>
+          )): livenews.ne.map((content,index) => (
+            <p className={`pr-2  ${livenews.ne.length != index+1 && "border-r-2"}`}>{content.title}</p>
           ))
         }
         </div>
@@ -172,7 +175,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
           <ul>
             {
               categories ? categories.map((cat:any,index:number) => (
-                <li key={index} className="hover:text-green-700 hover:dark:text-green-400"><Link href={cat.href}>{router.locale == "en" ? cat.title:cat.ne}</Link></li>
+                <li key={index} className="hover:text-green-700 hover:dark:text-green-400"><Link href={`/section/${cat.id}`}>{router.locale == "en" && cat.category}</Link></li>
               )):<>...</>
             }
           </ul>

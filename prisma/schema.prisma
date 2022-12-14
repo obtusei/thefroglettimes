@@ -22,7 +22,7 @@ model User {
   fullname String
   email    String    @unique
   password String
-  bio      String?
+  bio      String? @db.LongText
   image    String?
   Article  Article[]
   role     ROLE      @default(USER)
@@ -40,7 +40,7 @@ model Article {
   id          String    @unique @default(cuid())
   title       String
   slug        String?
-  content     String?
+  content     String? @db.LongText
   imageUrl    String?
   language    Language?
   author      User      @relation(fields: [authorEmail], references: [email])
@@ -51,4 +51,5 @@ model Article {
   category    Category? @relation(fields: [categoryId], references: [id])
   categoryId  String?
   tag         String?
+  readingTime String?
 }

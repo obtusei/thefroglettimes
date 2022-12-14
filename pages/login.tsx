@@ -7,6 +7,7 @@ import Layout from "../components/Layout";
 import { GetSessionDjango, loginTheUser } from "../utils/userapi";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
 export default function Login() {
 
   const [email,setEmail] = useState("")
@@ -26,8 +27,9 @@ export default function Login() {
       })
       
   }
+  // 0d9bf4fd8d2371f8ecb741c8488adfcdf20840291343a4acf4e9f908d6efd1d0
   const router = useRouter()
-  if (session){
+  if (djyango){
     router.push("/")
   }
   return (

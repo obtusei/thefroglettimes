@@ -66,7 +66,7 @@ export default function Home() {
       </div>
      </div>
      <div className='p-2 col-span-3 md:col-span-1'>
-      <h3 className='text-2xl font-bold'>{t("todayHeadline")}</h3>
+      <h3 className={`text-2xl font-bold ${router.locale == "en" ? "":"font-devhead"}`}>{t("todayHeadline")}</h3>
         <div className='grid grid-cols-3 md:grid-cols-1'>
           {
             news.map((content,index) => (
@@ -113,13 +113,24 @@ export default function Home() {
      <div className='col-span-3 md:col-span-1 md:border-r-2 border-gray-300 pr-2'>
       {/* <WideSkyscrapersAd/> */}
       <div className='p-4 overflow-hidden'>
-        <h3 className='text-2xl text-purple-700 dark:text-purple-400 pb-2 font-bold'>{t("horoscope")}</h3>
+        <h3 className={`text-2xl text-purple-700 dark:text-purple-400 pb-2 font-bold ${router.locale == "ne" && "font-devhead"}`}>{t("horoscope")}</h3>
         <div className='flex overflow-scroll flex-row md:flex-col md:space-y-4'>
           {
-          horoscope.en.map((zodiac) => (
+          router.locale == "en" ? horoscope.en.map((zodiac) => (
             <div key={zodiac.name} className="block">
               <div className="flex space-x-2  w-80">
                 <Image src={zodiac.svg_symbol} width={14} height={24} className="w-10 h-10 p-2 bg-purple-300 rounded-full " alt={zodiac.name}/>
+              <div>
+                <h4 className='text-xl font-bold'>{zodiac.name} <span className='text-sm'>({zodiac.date})</span></h4>
+                <p className='pr-4 text-gray-600 dark:text-gray-300'>{zodiac.today}</p>
+              </div>
+            </div>
+            </div>
+          )):
+          horoscope.ne.map((zodiac) => (
+            <div key={zodiac.name} className="block">
+              <div className="flex space-x-2  w-80">
+                <Image src={zodiac.svg_symbol} width={14} height={24} className="w-10 h-10 p-2 bg-red-50 rounded-full " alt={zodiac.name}/>
               <div>
                 <h4 className='text-xl font-bold'>{zodiac.name} <span className='text-sm'>({zodiac.date})</span></h4>
                 <p className='pr-4 text-gray-600 dark:text-gray-300'>{zodiac.today}</p>
@@ -134,7 +145,7 @@ export default function Home() {
      <div className='col-span-3 md:col-span-2 mt-2 md:mt-0 md:p-2'>
       
       <div className='p-2'>
-      <h3 className='text-2xl hover:underline'><Link href={"/international"}>{t("international")}</Link></h3>
+      <h3 className={`text-2xl hover:underline ${router.locale == "ne" && "font-devhead"}`}><Link href={"/international"}>{t("international")}</Link></h3>
         <div className='grid grid-cols-3 gap-4 px-2 pb-2'>
             {
               news.map((content,index)=> (
@@ -155,7 +166,7 @@ export default function Home() {
 
      {/* ------------------------------- CLASSIFIED NEWS ------------------------------ */}
       <div className='p-2 border-2 border-red-500 dark:border-red-400'>
-        <h3 className='text-2xl text-red-600 dark:text-red-400 hover:underline'><Link href={"/section/classified"}>{t("classified")}</Link></h3>
+        <h3 className={`text-2xl text-red-600 dark:text-red-400 hover:underline ${router.locale == "ne" && "font-devhead"}`}><Link href={"/section/classified"}>{t("classified")}</Link></h3>
 
         <div className='grid grid-cols-3 gap-4 px-2'>
             {

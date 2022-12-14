@@ -2,7 +2,9 @@ import Image from "next/image"
 import Link from "next/link"
 export const LeaderboardAd = ({m}:{m?:boolean}) => {
   return (
-    <div className={`bg-yellow-500 h-24 ${!m && "m-4"} flex items-center justify-center text-3xl text-white`}>ADS</div>
+    <div className={` h-24 ${!m && "m-4"} flex items-center justify-center text-3xl text-white`}>
+      <Image src={"/leaderAd.gif"} width={400} height={40} className={`w-full h-30`} alt="ADS"/>
+    </div>
   )
 }
 

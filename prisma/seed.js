@@ -2,8 +2,10 @@
 const { PrismaClient }  = require("@prisma/client")
 const prisma = new PrismaClient();
 const categories = require("../libs/categories.json")
-
+const users = require("../libs/users.json")
+const news = require("../libs/neededNew.json")
 // const bcrpyt = require("bcrypt");
+
 // const users = require('./users.json')
 // const blogs = require("./blogs.json")
 
@@ -13,24 +15,55 @@ const categories = require("../libs/categories.json")
           
 // }
 
-// async function createNewUsers(){
-//     const newUsers = await Promise.all(users.map(async (user) => user = {
-//             name:user.name,
-//             username:user.username,
-//             email:user.email,
-//             password: await encryptPassword(user.password),
-//             bio:user.bio,
-//             dateOfBirth:user.dateOfBirth,
-//             emailVerified:user.emailVerified
-//   }))
-//   await prisma.user.createMany({data:newUsers});
-// }
+async function createNewUsers(){
+    const newUsers = await Promise.all(users.map(async (user) => user = {
+            fullname:user.fullname,
+            email:user.email,
+            password: user.password,
+            bio:user.bio,
+            image:user.image
+  }))
+  await prisma.user.createMany({data:newUsers});
+}
+
+async function createNews(){
+    const users = await prisma.user.findMany()
+    const urandom = Math.floor(Math.random() * users.length);
+    const categoriesN = await prisma.category.findMany();
+    const crandom = Math.floor(Math.random() * categoriesN.length);
+    const newNews = await Promise.all(news.map(async (content) => content = {
+            title:content.title,
+            content:content.content,
+            imageUrl:content.imageUrl,
+            region:content.region,
+            language:content.language,
+            publishedAt:content.publishedAt,
+            updatedAt:content.updatedAt,
+            tag:content.tag,
+            readingTime:content.readingTime,
+            author:{
+                connect:{
+                    email:users[urandom].email
+                }
+            },
+            category:{
+                connect:{
+                    title:categoriesN[crandom].title
+                }
+            }
+
+            
+
+  }))
+  await prisma.article.createMany({data:newNews});
+}
+
+
 async function main() {
 
-//   const categories = await prisma.category.findMany();
-//   const users = await prisma.user.findMany()
-//   const crandom = Math.floor(Math.random() * categories.length);
-//   const urandom = Math.floor(Math.random() * users.length);
+    
+    const users = await prisma.user.findMany()
+    const urandom = Math.floor(Math.random() * users.length);
   
 //   const newten = blogs.slice(0,2)
 //   const newBlogs = await Promise.all(newten.map(async (blog) => blog = {
@@ -45,14 +78,15 @@ async function main() {
 //   await prisma.user.createMany({data:newUsers});
 //   await prisma.blog.createMany({data:newBlogs});
 
-const newCategories = await Promise.all(categories.map(async (cat) => cat ={
-    title:cat.title,
-    href:cat.href,
-    ne:cat.ne
-}))
+// const newCategories = await Promise.all(categories.map(async (cat) => cat ={
+//     title:cat.title,
+//     href:cat.href,
+//     ne:cat.ne
+// }))
 
-await prisma.category.createMany({data:newCategories})
-
+// await prisma.category.createMany({data:newCategories})
+    // await createNewUsers();
+    await createNews();
 
 }
 
