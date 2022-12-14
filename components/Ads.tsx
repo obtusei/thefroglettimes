@@ -18,7 +18,9 @@ export const LeaderboardAd2 = ({m}:{m?:boolean}) => {
 
 export const WideSkyscrapersAd = () => {
   return (
-    <div className='bg-green-500 h-96 m-4 flex items-center justify-center text-3xl text-white'>ADS</div>
+    <div className='bg-green-500 h-96 m-4 flex items-center justify-center text-3xl text-white'>
+      <Image src={"/SquareAd.jpg"} width={400} height={40} className={`w-full h-30`} alt="ADS"/>
+    </div>
   )
 }
 

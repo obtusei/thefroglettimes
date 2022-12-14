@@ -37,6 +37,17 @@ export const GetByCategory = ({cat,language,take}:{cat?:string,tag?:string,langu
     }
 }
 
+export const SearchAllNews = (q:string) => {
+  const newsURL = `/api/news/search?q=${q}`
+
+    const { data, error } = useSWR(newsURL, fetcher)
+    return {
+      news:data,
+      isLoading: !error && !data,
+      isError:error
+    }
+}
+
 export const SpecificNews = (id:string) => {
   const newsURL = `/api/news/one/?id=${id}`
     const { data, error } = useSWR(newsURL, fetcher)

@@ -58,6 +58,7 @@ function CreateNews({}: Props) {
   const [title,setTitle] = useState("")
   const [category,setCategory] = useState("General")
   const [region,setRegion] = useState("General");
+  const [imageUrl,setImageUrl] = useState("");
   const [language,setLanguage] = useState(router.locale?.toUpperCase());
   const [content,setContent] = useState("")
   const [showNav,setShowNav] = useState(false)
@@ -70,12 +71,13 @@ function CreateNews({}: Props) {
       {/* {djyango ? JSON.stringify(djyango):"login"} */}
       <div className='flex items-center justify-between'>
         <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input type="text" className='text-3xl border-2 w-1/2 p-2'  placeholder='Enter the title' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
       <div className='space-x-6 flex items-center'>
         <button onClick={() => setShowNav(!showNav)}>{!showNav ? <FullScreenIcon/>:<ExitFullScreenIcon/>}</button>
         
         <button className='btn' onClick={() => {
           if (session){
-            createNews({title,content,category,imageUrl:"",region,language,userEmail:session.user?.email})
+            createNews({title,content,category,imageUrl:imageUrl,region,language,userEmail:session.user?.email})
             alert("Article Created Successfully")
           }
         }}>Publish</button>

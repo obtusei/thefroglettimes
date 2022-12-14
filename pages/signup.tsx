@@ -42,10 +42,12 @@ export default function SignUp() {
     }
   }
   const router = useRouter()
-  const {data:session} = useSession();
-  if (session){
+  const {data:session,status} = useSession();
+  if (status === "loading"){
+    return <></>
+  }else if(status === "authenticated"){
     router.push("/")
-  }
+  }else{
   return (
     <Layout hideFooter hideNav>
       <div className="flex font-serif flex-col justify-center items-center h-screen">
@@ -82,4 +84,5 @@ export default function SignUp() {
     </div>
     </Layout>
   )
+  } 
 }

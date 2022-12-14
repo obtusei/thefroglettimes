@@ -31,7 +31,7 @@ async function createNews(){
     const urandom = Math.floor(Math.random() * users.length);
     const categoriesN = await prisma.category.findMany();
     const crandom = Math.floor(Math.random() * categoriesN.length);
-    const newNews = await Promise.all(news.map(async (content) => content = {
+    const newNews = await Promise.all(news.map(async (content,index) => content = {
             title:content.title,
             content:content.content,
             imageUrl:content.imageUrl,
@@ -76,9 +76,9 @@ const newCategories = await Promise.all(categories.map(async (cat) => cat ={
     ne:cat.ne
 }))
 
-    await prisma.category.createMany({data:newCategories})
+    // await prisma.category.createMany({data:newCategories})
     // await createNewUsers();
-    // await createNews();
+    await createNews();
 
 }
 

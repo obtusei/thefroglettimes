@@ -21,7 +21,7 @@ export function NewsCard({id,title,description,image,imageSize,author,readTime,s
   const date = new Date(publishedAt).toDateString()
   const router = useRouter();
   return (
-    <div className={`flex ${reverse ? "md:flex-row-reverse":"md:flex-row"} items-start space-x-3`}>
+    <div className={`flex ${reverse ? "md:flex-row-reverse":"md:flex-row"} items-start space-x-3 `}>
       {image && <Image src={image} width={imageSize ? imageSize:300} height={20} className='w-52 h-40 object-cover' alt="sadsa"/>}
         <div className=''>
           {

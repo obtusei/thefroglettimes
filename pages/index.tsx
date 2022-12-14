@@ -16,7 +16,7 @@ export default function Home() {
   const {t} = useTranslation("common")
   const {news:breakingNews} = MainPageNews({tag:"breaking",take:4,language:router.locale?.toUpperCase()})
   const {news:headlines} = MainPageNews({tag:"headlines",take:4,language:router.locale?.toUpperCase()})
-  const {news:mainNews} = MainPageNews({tag:"main",take:1,language:router.locale?.toUpperCase()})
+  const {news:mainNews} = MainPageNews({tag:"breaking",take:1,language:router.locale?.toUpperCase()})
   const {news:international} = MainPageNews({tag:"international",take:6,language:router.locale?.toUpperCase()})
   const {news:classified} = MainPageNews({tag:"classified",take:3,language:router.locale?.toUpperCase()})
   const {news:general} = MainPageNews({tag:"breaking",take:6,language:router.locale?.toUpperCase()})
@@ -38,6 +38,7 @@ export default function Home() {
             breakingNews ? breakingNews.map((content:any,index:any) => (
               <div key={index} className='p-2'>
                 <NewsCard 
+                    id={content.id}
                     title={content.title}
                     description={content.content}
                     author={""}
@@ -77,6 +78,7 @@ export default function Home() {
             headlines ? headlines.map((content:any,index:number) => (
               <div key={index} className="col-span-3 sm:col-span-2 md:col-span-1 p-1">
                 <NewsCard 
+                    id={content.id}
                     title={content.title}
                     image={content.imageUrl}
                     author={content.author}
@@ -97,7 +99,9 @@ export default function Home() {
         </div>
      </div>
   {/* ------------------------------- UpdatedNews ------------------------------ */}
-     <div className='col-span-3 border-t-2 border-b-2 border-gray-300 h-full'>
+     {
+      router.locale == "en" &&
+      <div className='col-span-3 border-t-2 border-b-2 border-gray-300 h-full'>
       <div className='grid grid-cols-4 md:grid-cols-3 py-2 gap-2'>
         {
         [1,2,3].map((content,index) => (
@@ -114,6 +118,7 @@ export default function Home() {
       }
       </div>
      </div>
+     }
      {/* ------------------------------- Third ------------------------------ */}
      <div className='col-span-3 md:col-span-1 md:border-r-2 border-gray-300 pr-2'>
       {/* <WideSkyscrapersAd/> */}
@@ -156,6 +161,7 @@ export default function Home() {
               international ? international.map((content:any,index:number)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
                   <NewsCardWithImageTop 
+                    id={content.id}
                     title={content.title}
                     description={content.content}
                     author={content.author}
@@ -178,6 +184,7 @@ export default function Home() {
               classified ? classified.map((content:any,index:number)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
                   <NewsCardWithImageTop
+                    id={content.id}
                     title={content.title}
                     description={content.content}
                     author={content.author}
@@ -204,6 +211,7 @@ export default function Home() {
               general ? general.map((content:any,index:any)=> (
                 <div key={index} className='col-span-4 md:col-span-2'>
                   <ModernNewsCard 
+                    id={content.id}
                     title={content.title}
                     description={content.content}
                     image={content.imageUrl}

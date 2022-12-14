@@ -24,6 +24,8 @@ function Section({}: Props) {
   const [region,setRegion] = useState("General")
   const {t} = useTranslation("common")
   const {news} = GetByCategory({cat:title,take:4,language:router.locale?.toUpperCase()})
+  const {news:allNews} = GetByCategory({cat:title,take:10,language:router.locale?.toUpperCase()})
+  const time = (date:string) => {return new Date(date).toLocaleString()}
   return (
     <Layout>
       <LeaderboardAd2/>
@@ -124,24 +126,23 @@ function Section({}: Props) {
           <div className='grid grid-cols-4'>
             <div className='col-span-4 md:col-span-3'>
               {
-                [1,2,3].map((content,index) => (
+                allNews ? allNews.map((content:any,index:number) => (
                   <div key={index} className='flex flex-row justify-between p-2 items-center space-x-5'>
-                    <div className='w-40'>6 Dec, 2022 </div>
+                    <div className='w-40'>{time(content.published_at)}</div>
                     <NewsCard 
-                          title="Titlte of the news goes here"
-                          description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, excepturi adipisci labore odit quisquam doloremque sed earum illo provident aperiam autem soluta expedita, cum quidem voluptates nesciunt! Corporis, enim vitae!"
-                          author="sadasdasd"
-                          image='/img.webp'
-                          imageSize={250}
+                          id={content.id}
+                          title={content.title}
+                          description={content.content}
+                          image={content.imageUrl}
                           publishedAt={"content.published_at"}
                       
                           />
                     </div>
-                ))
+                )):<></>
               }
             </div>
             <div className='hidden md:block'>
-              <WideSkyscrapersAd/>
+              <RectangleAd/>
             </div>
           </div>
             <div className='block md:hidden'>
