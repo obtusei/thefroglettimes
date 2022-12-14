@@ -4,7 +4,7 @@ import Image from "next/image"
 import ennews from "../libs/news.json"
 import nenews from "../libs/nenews.json"
 import { LeaderboardAd, ProductAd, RectangleAd, WideSkyscrapersAd } from '../components/Ads'
-import { NewsCard, NewsCardWithImageTop } from '../components/News/Card'
+import { ModernNewsCard, NewsCard, NewsCardWithImageTop } from '../components/News/Card'
 import Link from 'next/link'
 import horoscope from "../libs/zodiac.json"
 import { useRouter } from 'next/router'
@@ -187,7 +187,7 @@ export default function Home() {
             {
               news.map((content,index)=> (
                 <div key={index} className='col-span-4 md:col-span-2'>
-                  <NewsCard 
+                  <ModernNewsCard 
                     title={content.title}
                     description={content.description}
                     image={content.image}

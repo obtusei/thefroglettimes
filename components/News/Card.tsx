@@ -38,10 +38,10 @@ export function ModernNewsCard({title,description,image,imageSize,author,readTim
   const date = new Date(publishedAt).toDateString()
   const router = useRouter();
   return (
-    <div className={`grid grid-cols-2`}>
-      {image && <Image src={image} width={imageSize ? imageSize:300} height={200} className='w-52 h-full object-cover col-span-1' alt="sadsa"/>}
+    <div className={`grid grid-cols-2 gap-0`}>
+      {image && <Image src={image} width={imageSize ? imageSize:300} height={200} className='h-full object-cover col-span-1' alt="sadsa"/>}
       
-        <div className=''>
+        <div className='col-span-1'>
           {
             category && <p className='text-green-700'>{category}</p>
           } 
