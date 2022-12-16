@@ -7,6 +7,7 @@ import Dropdown from '../../components/Dropdown'
 import Image from 'next/image'
 import { GetSession } from '../../utils/userapi'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 type Props = {}
 
 function WriterProfile({}: Props) {
@@ -18,6 +19,11 @@ function WriterProfile({}: Props) {
   // }
   return (
     <Layout>
+      <Head>
+        <title>Profile | The Froglet Times</title>
+        <meta name="description" content="This is online news portal app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className='p-5'>
         <div>
         {

@@ -7,6 +7,7 @@ import Layout from "../components/Layout";
 import { registerTheUser } from "../utils/userapi";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 
 export default function SignUp() {
 
@@ -50,6 +51,11 @@ export default function SignUp() {
   }else{
   return (
     <Layout hideFooter hideNav>
+      <Head>
+        <title>Sign Up | The Froglet Times</title>
+        <meta name="description" content="This is online news portal app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="flex font-serif flex-col justify-center items-center h-screen">
       <div>
         <h1 className="font-logo text-3xl p-2"><Link href={"/"}>{t("logo")}</Link></h1>

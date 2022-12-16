@@ -1,4 +1,5 @@
 import useTranslation from "next-translate/useTranslation";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router"
 import { useState } from "react";
@@ -16,6 +17,11 @@ const Search = () => {
    const {t}  = useTranslation("common")
     return(
         <Layout>
+            <Head>
+        <title>Search | The Froglet Times</title>
+        <meta name="description" content="This is online news portal app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
             <div className="p-4">
                 <h1>{t("searchFor")}{searchQuery ? `" ${searchTerm}"`:"any news"}</h1>
                 <form className="bg-red-200 flex justify-between">

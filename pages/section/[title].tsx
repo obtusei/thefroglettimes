@@ -1,4 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { LeaderboardAd, LeaderboardAd2, RectangleAd, WideSkyscrapersAd } from '../../components/Ads'
@@ -30,6 +31,11 @@ function Section({}: Props) {
   const time = (date:string) => {return new Date(date).toLocaleString()}
   return (
     <Layout>
+      <Head>
+        <title>{title} | The Froglet Times</title>
+        <meta name="description" content="This is online news portal app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <LeaderboardAd2/>
       <div className='p-5'>
         <h2 className='text-4xl'>{title}</h2>

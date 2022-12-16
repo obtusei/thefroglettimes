@@ -7,6 +7,7 @@ import { createNews, createNewsDjango, GetSessionDjango } from '../../utils/user
 import { useSession } from 'next-auth/react'
 import { GetCategories } from '../../utils/newsapi'
 import { ExitFullScreenIcon, FullScreenIcon } from '../../components/Icons'
+import Head from 'next/head'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {	
 	ssr: false,
@@ -67,6 +68,11 @@ function CreateNews({}: Props) {
   // const {userSession:djyango} = GetSessionDjango();
   return (
     <Layout hideNav={showNav} hideFooter={showNav}>
+      <Head>
+        <title>Create News | The Froglet Times</title>
+        <meta name="description" content="This is online news portal app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className='p-4'>
       {/* {djyango ? JSON.stringify(djyango):"login"} */}
       <div className='flex items-start justify-between'>

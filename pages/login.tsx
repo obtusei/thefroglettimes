@@ -8,6 +8,7 @@ import { GetSessionDjango, loginTheUser } from "../utils/userapi";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
+import Head from "next/head";
 export default function Login() {
 
   const [email,setEmail] = useState("")
@@ -36,6 +37,11 @@ export default function Login() {
   }else{
     return (
       <Layout hideFooter hideNav>
+        <Head>
+        <title>Login | The Froglet Times</title>
+        <meta name="description" content="This is online news portal app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
         <div className="flex font-serif flex-col justify-center items-center h-screen">
         <div>
           <h1 className="font-logo text-3xl p-2"><Link href={"/"}>{t("logo")}</Link></h1>

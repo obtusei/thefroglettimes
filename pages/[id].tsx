@@ -11,6 +11,7 @@ import { MainPageNews, SpecificNews } from '../utils/newsapi'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
+import Head from 'next/head'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {	
 	ssr: false,
@@ -50,6 +51,11 @@ function News({}: Props) {
   const {news:newsData,isError:newsDataError} = SpecificNews(String(router.query.id))
   return (
     <Layout bg={bgColor}>
+      <Head>
+        <title>{newsData && newsData.title}</title>
+        <meta name="description" content="This is online news portal app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className='grid grid-cols-3 p-2'>
         <div className='col-span-3 md:col-span-2 md:border-r-2 border-black dark:border-white'>
           <LeaderboardAd/>
