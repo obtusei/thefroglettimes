@@ -36,6 +36,7 @@ export function NewsCard({id,title,description,image,imageSize,author,readTime,s
   )
 }
 
+
 export function ModernNewsCard({title,description,image,imageSize,author,readTime,size,publishedAt,category,reverse,id}: Props) {
   const date = new Date(publishedAt).toDateString()
   const router = useRouter();
@@ -67,6 +68,80 @@ export function NewsCardWithImageTop({id,title,description,image,imageSize,autho
           <h3 className={`text-xl ${size ? size:" md:text-2xl"} font-bold font-title hover:underline`}><Link href={`/${id}`}>{title}</Link></h3>
           {description && <p className='text-gray-500 line-clamp-2 md:line-clamp-4'>{description}</p>}
           <p className='text-sm text-gray-500'>{readTime ? readTime:date}{" • "}<Link href={`/by/love`} className="hover:underline">{author && author}</Link></p>
+        </div>
+    </div>
+  )
+}
+
+
+export function NewsCardShimmer({withContent,withImage}:{withContent?:boolean,withImage?:boolean}) {
+
+  return ( 
+    <div className={`flex items-start space-x-3 animate-pulse p-2`}>
+       {
+        withImage && <div className='w-52 h-40 object-cover bg-gray-400'/>
+       }
+        <div className='w-full'>
+          <h3 className={`text-xl hover:underline w-full h-6 bg-gray-400`}></h3>
+          <h3 className={`text-xl hover:underline ${withImage ? "w-4/5":"w-2/3"} h-6 mt-1 bg-gray-400`}></h3>
+          {withContent && 
+          <div>
+            <p className={`w-full h-3 bg-gray-400 mt-2`}></p>
+            <p className={`w-full h-3 bg-gray-400 mt-1`}></p>
+            <p className={`w-full h-3 bg-gray-400 mt-1`}></p>
+            <p className={`w-full h-3 bg-gray-400 mt-1`}></p>
+            <p className={`${withImage ? "w-4/5":"w-2/3"} h-3 bg-gray-400 mt-1`}></p>
+          </div>
+          }
+          <p className={`w-32 h-3 bg-gray-400 mt-2`}></p>
+        </div>
+    </div>
+  )
+}
+
+
+export function ModernNewsCardShimmer({withContent,withImage}:{withImage?:boolean,withContent?:boolean}) {
+  const router = useRouter();
+  return (
+    <div className={`grid grid-cols-2 gap-2`}>
+      {
+        withImage && <div className='w-full h-40 object-cover bg-gray-400'/>
+       }
+      
+        <div className='col-span-1'>
+          <h3 className={`text-xl hover:underline w-full h-6 bg-gray-400`}></h3>
+          {withContent && 
+          <div>
+            <p className={`w-full h-3 bg-gray-400 mt-2`}></p>
+
+            <p className={`w-full h-3 bg-gray-400 mt-1`}></p>
+            <p className={`${withImage ? "w-4/5":"w-2/3"} h-3 bg-gray-400 mt-1`}></p>
+          </div>
+          }
+          <p className={`w-32 h-3 bg-gray-400 mt-2`}></p>
+        </div>
+    </div>
+  )
+}
+
+export function NewsCardWithImageTopShimmer({withContent,withImage}:{withImage?:boolean,withContent?:boolean}) {
+
+  return (
+    <div className={`flex flex-col items-start space-y-1 animate-pulse p-2`}>
+      {
+        withImage && <div className='w-full h-40 object-cover bg-gray-400'/>
+       }
+        <div className='py-2 w-full'>
+           <h3 className={`text-xl hover:underline w-full h-6 bg-gray-400`}></h3>
+          {withContent && 
+          <div>
+            <p className={`w-full h-3 bg-gray-400 mt-2`}></p>
+
+            <p className={`w-full h-3 bg-gray-400 mt-1`}></p>
+            <p className={`${withImage ? "w-4/5":"w-2/3"} h-3 bg-gray-400 mt-1`}></p>
+          </div>
+          }
+          <p className={`w-32 h-3 bg-gray-400 mt-2`}></p>
         </div>
     </div>
   )

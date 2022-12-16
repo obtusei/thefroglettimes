@@ -131,15 +131,17 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
       <div className='hidden md:block p-2 '>
         <ul className='flex flex-wrap space-x-4 justify-center items-center '>
           {
-            categories ? categories.map((cat:any,index:number) => (
+            !categories ? categories.map((cat:any,index:number) => (
               <li key={index} className={`hover:text-green-700 ${router.locale === "ne" && "font-devCat"}`}><Link href={cat.href}>{router.locale == "en" ? cat.title:cat.ne}</Link></li>
             )):
-            <li></li>
+            [...Array(12)].map((card,index) => (
+              <li key={index} className='h-6 w-20 animate-pulse bg-gray-400 mt-1'></li>
+            ))
           }
         </ul>
       </div>
       <hr className='border-t-gray-400  mx-5'/>
-      <div className='px-5 py-4 text-center flex justify-between items-center space-x-4'>
+      <div className='px-5 py-4 text-center flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between items-center space-x-4'>
         <div className={`flex items-center space-x-4 ${router.locale == "ne" && "font-devCat"}`}>
         <span className='text-red-600 dark:text-blue-200 font-bold text-lg'>{t("live")}</span>
         {
