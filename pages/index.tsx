@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import { MainPageNews } from '../utils/newsapi'
 import { useEffect } from 'react'
+import regions from '../libs/regions'
 export default function Home() {
   const router = useRouter();
   const news = router.locale == "en" ? ennews:nenews
@@ -20,11 +21,16 @@ export default function Home() {
   const {news:mainNews} = MainPageNews({tag:"breaking",take:1,language:router.locale?.toUpperCase(),region:String(router.query.region).toUpperCase()})
   const {news:international} = MainPageNews({tag:"international",take:6,language:router.locale?.toUpperCase(),region:"INTERNATIONAL"})
   const {news:classified} = MainPageNews({tag:"classified",take:3,language:router.locale?.toUpperCase(),region:String(router.query.region).toUpperCase()})
-  const {news:general} = MainPageNews({tag:"breaking",take:6,language:router.locale?.toUpperCase()})
+  const {news:general} = MainPageNews({tag:"breaking",take:6,language:router.locale?.toUpperCase(),region:String(router.query.region).toUpperCase()})
+  const noNews = <div className='text-center flex items-center justify-center h-full'>{t("noNews")}</div>
   const shimmer = (number:number,c:boolean,i:boolean) => [...Array(number)].map((card,index) => (
               <NewsCardShimmer key={index} withContent={c} withImage={i}/>
             ))
-  
+  useEffect(() => {
+    if (!router.query.region){
+      router.push({pathname:"/",query:{region:"General"}})
+    }
+  })          
   return (
     <Layout>
       <Head>
@@ -39,7 +45,9 @@ export default function Home() {
       <div className='grid grid-cols-3'>
         <div className='col-span-3 md:col-span-1 md:border-b-2 md:border-r-2 md:border-gray-300 md:mr-2 h-full'>
           {
-            breakingNews ? breakingNews.map((content:any,index:any) => (
+            breakingNews ? (
+              breakingNews.length != 0 ?
+              breakingNews.map((content:any,index:any) => (
               <div key={index} className='p-2'>
                 <NewsCard 
                     id={content.id}
@@ -54,12 +62,14 @@ export default function Home() {
                 }
               </div>
             )):
+            noNews
+            ):
             shimmer(3,true,false)
           }
         </div>
         
         {
-          mainNews && mainNews.length == 1 ? 
+          mainNews ? (mainNews.length == 1 ? 
           <div className='col-span-3 md:col-span-2'>
           <Image src={mainNews[0]?.imageUrl} width={800} height={200} alt="sadsa"/>
           {/* <p className='font-bold'>{main.title}</p> */}
@@ -69,7 +79,7 @@ export default function Home() {
             <p className='text-gray-500 line-clamp-6'>{mainNews[0].content}</p>
             <p className='text-sm text-gray-500'>{mainNews[0].readingTime} mins</p>
           </div>
-        </div>:
+        </div>:noNews):
         <MainNewsShimmer/>
         }
         <div className='col-span-3 py-2'>
@@ -81,7 +91,8 @@ export default function Home() {
       <h3 className={`text-2xl font-bold ${router.locale == "en" ? "":"font-devhead"}`}>{t("todayHeadline")}</h3>
         <div className='grid grid-cols-3 md:grid-cols-1'>
           {
-            headlines ? headlines.map((content:any,index:number) => (
+            headlines ? (
+              headlines.length !=0 ? headlines.map((content:any,index:number) => (
               <div key={index} className="col-span-3 sm:col-span-2 md:col-span-1 p-1">
                 <NewsCard 
                     id={content.id}
@@ -95,7 +106,8 @@ export default function Home() {
                     />
                 <hr />
               </div>
-            )):shimmer(4,false,true)
+            )):noNews
+            ):shimmer(4,false,true)
           }
           <div className='col-span-3 md:col-span-1'>
             <div className='hidden md:block'><WideSkyscrapersAd/></div>
@@ -110,17 +122,17 @@ export default function Home() {
       <div className='col-span-3 border-t-2 border-b-2 border-gray-300 h-full'>
       <div className='grid grid-cols-4 md:grid-cols-3 py-2 gap-2'>
         {
-        [1,2,3].map((content,index) => (
+        classified ? classified.map((content:any,index:number) => (
           <div key={index} className='col-span-4 sm:col-span-2 md:col-span-1'>
               <div className='flex space-x-2 items-center'>
-                <Image src={"/img.webp"} width={150} height={10} style={{objectFit:"cover"}} alt="sadsa"/>
+                <Image src={content.imageUrl} width={150} height={10} style={{objectFit:"cover"}} alt="sadsa"/>
               <div>
-                <h3 className='text-lg md:text-xl font-bold font-title text-red-600 dark:text-red-400'>ATHENS UPDATED</h3>
-                <p className='text-lg lg:text-xl w-40 hover:underline'><Link href={"/"}>CULTURAL SCENE PULSES ANEW</Link></p>
+                <h3 className='text-lg md:text-xl font-bold font-title text-red-600 dark:text-red-400'>{"ATHENS UPDATED"}</h3>
+                <p className='text-lg lg:text-xl w-40 hover:underline'><Link href={"/"}>{content.title}</Link></p>
               </div>
               </div>
           </div>
-        ))
+        )):<></>
       }
       </div>
      </div>
@@ -164,7 +176,9 @@ export default function Home() {
       <h3 className={`text-2xl hover:underline ${router.locale == "ne" && "font-devhead"}`}><Link href={"/international"}>{t("international")}</Link></h3>
         <div className='grid grid-cols-3 gap-4 px-2 pb-2'>
             {
-              international ? international.map((content:any,index:number)=> (
+              international ? (
+                international.length > 0 ? 
+                international.map((content:any,index:number)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
                   <NewsCardWithImageTop 
                     id={content.id}
@@ -177,6 +191,12 @@ export default function Home() {
                     />
                 </div>
               )):
+              <div className='h-96 col-span-3'>
+                {
+                  noNews
+                }
+              </div>
+              ):
               [1,2,3,4,5,6].map((ard,index) => (
                 <NewsCardWithImageTopShimmer key={index} withContent withImage/>
               ))
@@ -190,7 +210,8 @@ export default function Home() {
 
         <div className='grid grid-cols-3 gap-4 px-2'>
             {
-              classified ? classified.map((content:any,index:number)=> (
+              classified ? (
+                classified.length > 0 ? classified.map((content:any,index:number)=> (
                 <div key={index} className='col-span-3 md:col-span-1'>
                   <NewsCardWithImageTop
                     id={content.id}
@@ -203,6 +224,12 @@ export default function Home() {
                     />
                 </div>
               )):
+              <div className='h-96 col-span-3'>
+                {
+                  noNews
+                }
+              </div>
+              ):
               [1,2,3].map((ard,index) => (
                 <NewsCardWithImageTopShimmer key={index} withContent withImage/>
               ))
@@ -220,7 +247,8 @@ export default function Home() {
           <div className='grid grid-cols-4 gap-4 pt-2'>
             
             {
-              general ? general.map((content:any,index:any)=> (
+              general ? (
+                general.length > 0  ? general.map((content:any,index:any)=> (
                 <div key={index} className='col-span-4 md:col-span-2'>
                   <ModernNewsCard 
                     id={content.id}
@@ -232,7 +260,12 @@ export default function Home() {
                     category={content.category}
                     />
                 </div>
-              )):
+              )) : <div className='h-96 col-span-4'>
+                {
+                  noNews
+                }
+              </div>
+              ):
               
                   [1,2,3,4,5,6,7,8,9].map((card,index) => (
                     <div key={index} className='col-span-4 md:col-span-2'>
@@ -242,7 +275,9 @@ export default function Home() {
             }
             <div className='col-span-2'>
               
-            <ProductAd/>
+            {
+              general && general.length > 0 ? <ProductAd/>:<></>
+            }
             </div>
           </div>
      </div>

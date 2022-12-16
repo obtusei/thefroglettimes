@@ -5,6 +5,8 @@
   "variable-example": "Using a variable {{count}}",
   "search":"समाचार, लेख, खण्ड, पत्रकार खोज्नुहोस्",
   "searchHead":"खोज",
+  "searchFor":"खोज्दै",
+  "noNews":"कुनै खबर छैन :(",
   "breakingNews":"ब्रेकिङ न्युज",
   "close":"बन्द",
   "todayHeadline":"आजका हेडलाइन्स",

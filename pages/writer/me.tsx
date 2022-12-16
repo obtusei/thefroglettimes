@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../../components/Layout'
 import ennews from "../.../../../libs/news.json"
 import nenews from "../.../../../libs/nenews.json"
-import { NewsCard } from '../../components/News/Card'
+import { NewsCard, NewsCardShimmer } from '../../components/News/Card'
 import Dropdown from '../../components/Dropdown'
 import Image from 'next/image'
 import { GetSession } from '../../utils/userapi'
@@ -50,7 +50,11 @@ function WriterProfile({}: Props) {
                 <hr />
               </div>
             )):
-            <></>
+            [...Array(3)].map((content,index) => (
+              <div key={index} className="col-span-3 sm:col-span-2 md:col-span-1 p-1">
+                  <NewsCardShimmer withContent withImage/>
+              </div>
+            ))
           }
         </div>
       </div>

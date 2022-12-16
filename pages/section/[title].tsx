@@ -25,8 +25,8 @@ function Section({}: Props) {
   const [region,setRegion] = useState("General")
   const {t} = useTranslation("common")
   const {news} = GetByCategory({cat:title,take:4,language:router.locale?.toUpperCase()})
-  const {news:allNews} = GetByCategory({cat:title,take:10,language:router.locale?.toUpperCase()})
-  const {news:mainNews} = GetByCategory({cat:title,take:1,language:router.locale?.toUpperCase()})
+  const {news:allNews,isLoading:allNewsLoading} = GetByCategory({cat:title,take:10,language:router.locale?.toUpperCase()})
+  const {news:mainNews,isLoading:mainLoading} = GetByCategory({cat:title,take:1,language:router.locale?.toUpperCase()})
   const time = (date:string) => {return new Date(date).toLocaleString()}
   return (
     <Layout>
@@ -40,19 +40,19 @@ function Section({}: Props) {
             <div className='col-span-3 md:col-span-2 md:border-r-2 border-black'>
             <div className='grid grid-cols-1 gap-2 px-2'>
               {
-                mainNews ? 
+                mainNews  && mainNews.length > 0 ?
                 <NewsCardWithImageTop
                 id={mainNews[0].id}
                 title={mainNews[0].title}
                 description={mainNews[0].content}
-                image='/img.webp'
+                image={mainNews[0].imageUrl}
                 publishedAt={mainNews[0].pib}
-                />:
-                <MainNewsShimmer/>
+                /> :  mainLoading ? 
+                <MainNewsShimmer/>:<></>
               }
               <div className='grid grid-cols-4 gap-3'>
               {
-              news ? news?.map((content:any,index:any)=> (
+              news && news.length > 0 ? news?.map((content:any,index:any)=> (
                 <div key={index} className='col-span-4 md:col-span-2'>
                   <ModernNewsCard 
                     id={content.id}
@@ -63,7 +63,7 @@ function Section({}: Props) {
                     publishedAt={content.publishedAt}
                     />
                 </div>
-              )):
+              )): !allNewsLoading ? <>No News</>:
               [...Array(4)].map((card,index) => (
                 <div key={index} className='col-span-4 md:col-span-2'>
                   <ModernNewsCardShimmer withContent withImage/>

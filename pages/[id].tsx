@@ -66,7 +66,7 @@ function News({}: Props) {
           {
             newsData ? 
             <div className='p-5'>
-            <p className='py-4 text-xl text-green-600 font-bold'>{newsData.lang == "en" ? newsData.category.title:newsData.category.ne}</p>
+            <p className='py-4 text-xl text-green-600 font-bold'>{newsData.lang == "EN" ? newsData.category.title:newsData.category.ne}</p>
             <h1 className='text-5xl font-title font-bold py-4'>{newsData.title}</h1>
             <p className='hover:underline'>By {newsData.author.fullname}</p>
             <p className='mt-2 text-gray-500'>Updated At: {time(newsData.updatedAt)}</p>

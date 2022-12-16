@@ -2,6 +2,7 @@ import React, { useEffect, useState,useCallback, KeyboardEvent } from 'react'
 import Footer from './Footer'
 import { MoonIcon, SunIcon } from './Icons'
 import Navbar from './Navbar'
+import { useSession } from 'next-auth/react'
 
 type Props = {
   children:React.ReactNode,
@@ -26,6 +27,7 @@ function Layout({children,bg,hideNav,hideFooter}: Props) {
     },
     [isDark,showSearch]
   );
+  const {data:session} = useSession()
   useEffect(()=> {
      document.addEventListener('keydown', handleKeyPress);
 

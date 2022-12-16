@@ -44,6 +44,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
   const handleClick = (path: string) => {
     router.push(path);
   };
+  const filteredRegion = regions.filter((re) => {return re.title === router.query.region})
   const langDropDown = <Dropdown title={`${router.locale?.toUpperCase()}`}>
             {
               <ul className="py-1 text-gray-700 dark:text-gray-200">
@@ -58,7 +59,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
             }
           </Dropdown>
       const colorModeSwitch = <button onClick={changeColor}>{colorModeIcon}</button>
-      const regionDropDown = <Dropdown title={`${router.query.region ? router.query.region:region}`}value={region}>
+      const regionDropDown = <Dropdown title={`${router.query.region ? (router.locale == "en" ? filteredRegion[0].title:filteredRegion[0].ne):region}`}value={region}>
      <ul className="py-1 text-gray-700 dark:text-gray-200">
                 {
                   regions.map((region,index) => (
@@ -76,6 +77,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
       <div className='flex justify-between items-center p-5'>
         <div className='flex items-center space-x-3'>
           <button onClick={() => setShowMenu(true)}><HamMenu/></button>
+          <div className='block md:hidden'>{langDropDown}</div>
           <div className='hidden md:flex items-center'>
             <p>{date.toDateString()}</p>
             {router.pathname == "/" && regionDropDown}

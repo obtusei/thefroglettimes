@@ -5,6 +5,8 @@
   "variable-example": "Using a variable {{count}}",
   "search":"Search news, article, section, journalist",
   "searchHead":"Search",
+  "noNews":"No news :(",
+  "searchFor":"Searching for",
   "close":"Close",
   "breakingNews":"BREAKING NEWS",
   "todayHeadline":"Today's Headlines",
