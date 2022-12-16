@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ConvertTime } from '../../libs/timeConvert'
+import {convert} from "html-to-text"
 
 type Props = {
   id:string,
@@ -29,7 +30,7 @@ export function NewsCard({id,title,description,image,imageSize,author,readTime,s
             category && <p className='text-green-700'>{category}</p>
           } 
           <h3 className={`text-xl ${size ? size:" md:text-2xl"} ${router.locale == "ne" ? "font-devhead":"font-title"} hover:underline`}><Link href={`/${id}`}>{title}</Link></h3>
-          {description && <p className={`text-gray-500 line-clamp-3 md:line-clamp-4 ${router.locale == "ne" ? "font-devbody text-xl mt-2 font-medium leading-5":"font-body"}`}>{description}</p>}
+          {description && <p className={`text-gray-500 line-clamp-3 md:line-clamp-4 ${router.locale == "ne" ? "font-devbody text-xl mt-2 font-medium leading-5":"font-body"}`}>{convert(description)}</p>}
           <p className='text-sm text-gray-500'>{readTime ? readTime:date}{" • "}<Link href={`/by/love`} className="hover:underline">{author && author}</Link></p>
         </div>
     </div>
@@ -74,6 +75,44 @@ export function NewsCardWithImageTop({id,title,description,image,imageSize,autho
 }
 
 
+export function MainNewsShimmer(){
+  return(
+    <div className='col-span-3 md:col-span-2 animate-pulse'>
+          <div className='w-full h-96 bg-gray-400'></div>
+          <hr/>
+          <div className='py-2'>
+            <h3 className='w-full h-8 bg-gray-400'></h3>
+            <h3 className='w-4/5 h-8 mt-1 bg-gray-400'></h3>
+            <p className='w-full h-3 mt-3 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-2/3 h-3 mt-1 bg-gray-400'></p>
+            
+          </div>
+        </div>
+  )
+}
+
+
+export function NewsShimmer() {
+  return (
+    <div className='p-5 animate-pulse'>
+            <p className='py-4 text-xl w-1/5 bg-gray-400'></p>
+            <h1 className='mt-6 w-full h-8  bg-gray-400'></h1>
+            <h1 className='mt-2 w-3/5 h-8  bg-gray-400'></h1>
+            <p className='mt-4 w-1/5 h-6 bg-gray-400'></p>
+            <p className='mt-2 w-2/5 h-6 bg-gray-400'></p>
+            <div className='bg-gray-400 mt-2 h-24'>      
+            </div>
+            <p className={`mt-5 w-full h-96 bg-gray-400`}></p>
+          </div>
+  )
+}
+
 export function NewsCardShimmer({withContent,withImage}:{withContent?:boolean,withImage?:boolean}) {
 
   return ( 
@@ -90,7 +129,6 @@ export function NewsCardShimmer({withContent,withImage}:{withContent?:boolean,wi
             <p className={`w-full h-3 bg-gray-400 mt-1`}></p>
             <p className={`w-full h-3 bg-gray-400 mt-1`}></p>
             <p className={`w-full h-3 bg-gray-400 mt-1`}></p>
-            <p className={`${withImage ? "w-4/5":"w-2/3"} h-3 bg-gray-400 mt-1`}></p>
           </div>
           }
           <p className={`w-32 h-3 bg-gray-400 mt-2`}></p>

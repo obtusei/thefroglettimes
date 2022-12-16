@@ -16,7 +16,7 @@ export const GetCategories = () => {
 }
 
 export const MainPageNews = ({cat,tag,language,region,take}:{cat?:string,tag?:string,language?:string,region?:string,take:number}) => {
-  const newsURL = `/api/news/all/?tag=${tag}&take=${take}&lang=${language}`
+  const newsURL = `/api/news/all/?tag=${tag}&take=${take}&lang=${language}&region=${region ? region:"GENERAL"}`
 
     const { data, error } = useSWR(newsURL, fetcher)
     return {
@@ -37,8 +37,8 @@ export const GetByCategory = ({cat,language,take}:{cat?:string,tag?:string,langu
     }
 }
 
-export const SearchAllNews = (q:string) => {
-  const newsURL = `/api/news/search?q=${q}`
+export const SearchAllNews = (q:string,language?:string) => {
+  const newsURL = `/api/news/search?q=${q}&lang=${language ? language:"EN"}`
 
     const { data, error } = useSWR(newsURL, fetcher)
     return {

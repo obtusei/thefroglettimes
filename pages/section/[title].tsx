@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { LeaderboardAd, LeaderboardAd2, RectangleAd, WideSkyscrapersAd } from '../../components/Ads'
 import Layout from '../../components/Layout'
-import { ModernNewsCard, NewsCard, NewsCardWithImageTop } from '../../components/News/Card'
+import { MainNewsShimmer, ModernNewsCard, ModernNewsCardShimmer, NewsCard, NewsCardWithImageTop } from '../../components/News/Card'
 import { MONTHS } from '../../libs/filterStuff'
 // import news from "../../libs/news.json"
 import regions from '../../libs/regions'
@@ -35,17 +35,21 @@ function Section({}: Props) {
         <h2 className='text-4xl'>{title}</h2>
         <hr />
         <div className='grid grid-cols-3 py-2'>
-          {
-            mainNews && 
+          
+            
             <div className='col-span-3 md:col-span-2 md:border-r-2 border-black'>
             <div className='grid grid-cols-1 gap-2 px-2'>
-              <NewsCardWithImageTop
+              {
+                mainNews ? 
+                <NewsCardWithImageTop
                 id={mainNews[0].id}
                 title={mainNews[0].title}
                 description={mainNews[0].content}
                 image='/img.webp'
                 publishedAt={mainNews[0].pib}
-                />
+                />:
+                <MainNewsShimmer/>
+              }
               <div className='grid grid-cols-4 gap-3'>
               {
               news ? news?.map((content:any,index:any)=> (
@@ -59,12 +63,18 @@ function Section({}: Props) {
                     publishedAt={content.publishedAt}
                     />
                 </div>
-              )):<></>
+              )):
+              [...Array(4)].map((card,index) => (
+                <div key={index} className='col-span-4 md:col-span-2'>
+                  <ModernNewsCardShimmer withContent withImage/>
+                </div>
+              ))
+              
             }
               </div>
             </div>
           </div>
-          }
+          
           <div className='col-span-3 md:col-span-1 p-2'>
             <div className='grid grid-cols-1 gap-2'>
               {
@@ -78,7 +88,12 @@ function Section({}: Props) {
                     publishedAt={content.publishedAt}
                     />
                 </div>
-              )):<></>
+              )):
+              [...Array(4)].map((card,index) => (
+                <div key={index} className='col-span-4 md:col-span-2'>
+                  <ModernNewsCardShimmer withContent withImage/>
+                </div>
+              ))
             }
             <div className="mb-52">
             <RectangleAd/>

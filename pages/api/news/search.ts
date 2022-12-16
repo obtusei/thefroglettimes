@@ -20,6 +20,13 @@ export default async function handler(
                 contains:String(req.query.q)
               }
             },
+          ],
+          AND:[
+            {
+              language:{
+                equals:(req.query.lang as Language)
+              }
+            }
           ]
         },
         

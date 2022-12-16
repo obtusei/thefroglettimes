@@ -131,7 +131,7 @@ function Navbar({changeColor,colorModeIcon,openSearchBar,setSearchBar}: Props) {
       <div className='hidden md:block p-2 '>
         <ul className='flex flex-wrap space-x-4 justify-center items-center '>
           {
-            !categories ? categories.map((cat:any,index:number) => (
+            categories ? categories.map((cat:any,index:number) => (
               <li key={index} className={`hover:text-green-700 ${router.locale === "ne" && "font-devCat"}`}><Link href={cat.href}>{router.locale == "en" ? cat.title:cat.ne}</Link></li>
             )):
             [...Array(12)].map((card,index) => (

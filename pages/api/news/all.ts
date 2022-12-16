@@ -21,23 +21,21 @@ export default async function handler(
               },
             },
             {
-              region:{
-                equals:String(req.query.region)
-              }
-            },
-            {
               tag:{
                 equals:String(req.query.tag)
               }
-            }
+            },
           ],
           AND:[
             {
               language:{
                 equals:(req.query.lang as Language)
               }
-            }
-          ]
+            },
+          ],
+          region:{
+            equals:String(req.query.region)
+          }
         },
         
       })

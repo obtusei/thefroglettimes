@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { LeaderboardAd, RectangleAd } from '../components/Ads'
 import Dropdown, { DropdownTwo } from '../components/Dropdown'
 import Layout from '../components/Layout'
-import { ModernNewsCard, NewsCard, NewsCardWithImageTop } from '../components/News/Card'
+import { ModernNewsCard, ModernNewsCardShimmer, NewsCard, NewsCardWithImageTop, NewsShimmer } from '../components/News/Card'
 import news from "../libs/news.json"
 import Link from 'next/link'
 import { CheckIcon, InfoIcon } from '../components/Icons'
@@ -10,6 +10,7 @@ import { title } from 'process'
 import { MainPageNews, SpecificNews } from '../utils/newsapi'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import parse from 'html-react-parser';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {	
 	ssr: false,
@@ -20,6 +21,7 @@ type Props = {}
 function News({}: Props) {
   const fontSizes = ['xs','sm','md','lg','xl','2xl','3xl','4xl']
   const [bgColor,setBgColor] = useState('bg-white')
+  const time = (d:string) => new Date(d).toDateString();
   const router = useRouter()
   const {news:breakingNews} = MainPageNews({tag:"breaking",take:4,language:router.locale?.toUpperCase()})
   const colors = [
@@ -45,7 +47,7 @@ function News({}: Props) {
   const [fontSize,setFontSize] = useState(3)
   const fonts:any = [{title:'Sans',handle:() => setFont('font-sans')},{title:'Serif',handle:() => setFont('font-serif')},{title:'Mono',handle:() => setFont('font-mono')}]
   const [font,setFont] = useState('Serif')
-  const {news:newsData} = SpecificNews(String(router.query.id))
+  const {news:newsData,isError:newsDataError} = SpecificNews(String(router.query.id))
   return (
     <Layout bg={bgColor}>
       <div className='grid grid-cols-3 p-2'>
@@ -64,10 +66,10 @@ function News({}: Props) {
           {
             newsData ? 
             <div className='p-5'>
-            <p className='py-4 text-xl text-green-600 font-bold'>{newsData.category.title}</p>
+            <p className='py-4 text-xl text-green-600 font-bold'>{newsData.lang == "en" ?newsData.category.title:newsData.category.ne}</p>
             <h1 className='text-5xl font-title font-bold py-4'>{newsData.title}</h1>
             <p className='hover:underline'>By {newsData.author.fullname}</p>
-            <p className='mt-2'>Updated At: {newsData.updatedAt}</p>
+            <p className='mt-2 text-gray-500'>Updated At: {time(newsData.updatedAt)}</p>
             <div className='bg-blue-50 mt-2 p-2 flex items-center space-x-4 border-2 text-blue-800 border-blue-500 dark:border-blue-50 rounded-md dark:text-blue-50 dark:bg-sky-900'>
               <InfoIcon/>
               <div>
@@ -79,9 +81,9 @@ function News({}: Props) {
               </div>
             </div>
             {/* <QuillNoSSRWrapper defaultValue={newsData.content} readOnly className={`py-5 text-${fontSizes[fontSize]} ${font}`} /> */}
-            <p className={`py-5 text-${fontSizes[fontSize]} ${font}`}>{newsData.content}</p>
+            <p className={`py-5 text-${fontSizes[fontSize]} ${font}`}>{parse(newsData.content)}</p>
             <LeaderboardAd/>
-          </div>:<div className='text-3xl p-4'>{"News doesn't exist"}</div>
+          </div> : newsData === null ? <div className='text-3xl p-4'>News Doesn't Exist</div>:<NewsShimmer/>
           }
         </div>
         {/* ----------------------- ARKO SECTION ------------------------- */}
@@ -104,7 +106,12 @@ function News({}: Props) {
                     index != 2 && <hr />
                   }
                 </div>
-              )):<></>
+              )):
+              [...Array(4)].map((card,index) => (
+                <div key={index} className='col-span-4 md:col-span-2'>
+                  <ModernNewsCardShimmer withContent withImage/>
+                </div>
+              ))
             }
           </div>
         </div>

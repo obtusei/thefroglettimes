@@ -4,25 +4,27 @@ import Image from "next/image"
 import ennews from "../libs/news.json"
 import nenews from "../libs/nenews.json"
 import { LeaderboardAd, ProductAd, RectangleAd, WideSkyscrapersAd } from '../components/Ads'
-import { ModernNewsCard, ModernNewsCardShimmer, NewsCard, NewsCardShimmer, NewsCardWithImageTop, NewsCardWithImageTopShimmer } from '../components/News/Card'
+import { MainNewsShimmer, ModernNewsCard, ModernNewsCardShimmer, NewsCard, NewsCardShimmer, NewsCardWithImageTop, NewsCardWithImageTopShimmer } from '../components/News/Card'
 import Link from 'next/link'
 import horoscope from "../libs/zodiac.json"
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import { MainPageNews } from '../utils/newsapi'
+import { useEffect } from 'react'
 export default function Home() {
   const router = useRouter();
   const news = router.locale == "en" ? ennews:nenews
   const {t} = useTranslation("common")
-  const {news:breakingNews} = MainPageNews({tag:"breaking",take:4,language:router.locale?.toUpperCase()})
-  const {news:headlines} = MainPageNews({tag:"headlines",take:4,language:router.locale?.toUpperCase()})
-  const {news:mainNews} = MainPageNews({tag:"breaking",take:1,language:router.locale?.toUpperCase()})
-  const {news:international} = MainPageNews({tag:"international",take:6,language:router.locale?.toUpperCase()})
-  const {news:classified} = MainPageNews({tag:"classified",take:3,language:router.locale?.toUpperCase()})
+  const {news:breakingNews} = MainPageNews({tag:"breaking",take:4,language:router.locale?.toUpperCase(),region:String(router.query.region).toUpperCase()})
+  const {news:headlines} = MainPageNews({tag:"headlines",take:4,language:router.locale?.toUpperCase(),region:String(router.query.region).toUpperCase()})
+  const {news:mainNews} = MainPageNews({tag:"breaking",take:1,language:router.locale?.toUpperCase(),region:String(router.query.region).toUpperCase()})
+  const {news:international} = MainPageNews({tag:"international",take:6,language:router.locale?.toUpperCase(),region:"INTERNATIONAL"})
+  const {news:classified} = MainPageNews({tag:"classified",take:3,language:router.locale?.toUpperCase(),region:String(router.query.region).toUpperCase()})
   const {news:general} = MainPageNews({tag:"breaking",take:6,language:router.locale?.toUpperCase()})
   const shimmer = (number:number,c:boolean,i:boolean) => [...Array(number)].map((card,index) => (
               <NewsCardShimmer key={index} withContent={c} withImage={i}/>
             ))
+  
   return (
     <Layout>
       <Head>
@@ -59,7 +61,7 @@ export default function Home() {
         {
           mainNews ? 
           <div className='col-span-3 md:col-span-2'>
-          <Image src={"/img.webp"} width={800} height={200} alt="sadsa"/>
+          <Image src={mainNews[0].imageUrl} width={800} height={200} alt="sadsa"/>
           {/* <p className='font-bold'>{main.title}</p> */}
           <hr/>
           <div className='py-2'>
@@ -68,23 +70,7 @@ export default function Home() {
             <p className='text-sm text-gray-500'>{mainNews[0].readingTime} mins</p>
           </div>
         </div>:
-        <div className='col-span-3 md:col-span-2 animate-pulse'>
-          <div className='w-full h-96 bg-gray-400'></div>
-          <hr/>
-          <div className='py-2'>
-            <h3 className='w-full h-8 bg-gray-400'></h3>
-            <h3 className='w-4/5 h-8 mt-1 bg-gray-400'></h3>
-            <p className='w-full h-3 mt-3 bg-gray-400'></p>
-            <p className='w-full h-3 mt-1 bg-gray-400'></p>
-            <p className='w-full h-3 mt-1 bg-gray-400'></p>
-            <p className='w-full h-3 mt-1 bg-gray-400'></p>
-            <p className='w-full h-3 mt-1 bg-gray-400'></p>
-            <p className='w-full h-3 mt-1 bg-gray-400'></p>
-            <p className='w-full h-3 mt-1 bg-gray-400'></p>
-            <p className='w-2/3 h-3 mt-1 bg-gray-400'></p>
-            
-          </div>
-        </div>
+        <MainNewsShimmer/>
         }
         <div className='col-span-3 py-2'>
           <LeaderboardAd m/>
