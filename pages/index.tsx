@@ -4,7 +4,7 @@ import Image from "next/image"
 import ennews from "../libs/news.json"
 import nenews from "../libs/nenews.json"
 import { LeaderboardAd, ProductAd, RectangleAd, WideSkyscrapersAd } from '../components/Ads'
-import { ModernNewsCard, NewsCard, NewsCardWithImageTop } from '../components/News/Card'
+import { ModernNewsCard, ModernNewsCardShimmer, NewsCard, NewsCardShimmer, NewsCardWithImageTop, NewsCardWithImageTopShimmer } from '../components/News/Card'
 import Link from 'next/link'
 import horoscope from "../libs/zodiac.json"
 import { useRouter } from 'next/router'
@@ -20,7 +20,9 @@ export default function Home() {
   const {news:international} = MainPageNews({tag:"international",take:6,language:router.locale?.toUpperCase()})
   const {news:classified} = MainPageNews({tag:"classified",take:3,language:router.locale?.toUpperCase()})
   const {news:general} = MainPageNews({tag:"breaking",take:6,language:router.locale?.toUpperCase()})
-  
+  const shimmer = (number:number,c:boolean,i:boolean) => [...Array(number)].map((card,index) => (
+              <NewsCardShimmer key={index} withContent={c} withImage={i}/>
+            ))
   return (
     <Layout>
       <Head>
@@ -29,7 +31,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
     <LeaderboardAd/>
-    <div className='grid grid-cols-3 p-4'>
+    <div className='grid grid-cols-3 mt-4 p-4'>
      <div className='md:border-r-2 border-r-gray-300 px-2 col-span-3 md:col-span-2'>
       <h3 className={`text-2xl font-bold ${router.locale == "en" ? "":"font-devhead"}`}>{t("breakingNews")}</h3>
       <div className='grid grid-cols-3'>
@@ -49,7 +51,8 @@ export default function Home() {
                   breakingNews.length != index+1 && <hr/>
                 }
               </div>
-            )):<>Loading...</>
+            )):
+            shimmer(3,true,false)
           }
         </div>
         
@@ -64,7 +67,24 @@ export default function Home() {
             <p className='text-gray-500 line-clamp-6'>{mainNews[0].content}</p>
             <p className='text-sm text-gray-500'>{mainNews[0].readingTime} mins</p>
           </div>
-        </div>:<>Loading...</>
+        </div>:
+        <div className='col-span-3 md:col-span-2 animate-pulse'>
+          <div className='w-full h-96 bg-gray-400'></div>
+          <hr/>
+          <div className='py-2'>
+            <h3 className='w-full h-8 bg-gray-400'></h3>
+            <h3 className='w-4/5 h-8 mt-1 bg-gray-400'></h3>
+            <p className='w-full h-3 mt-3 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-full h-3 mt-1 bg-gray-400'></p>
+            <p className='w-2/3 h-3 mt-1 bg-gray-400'></p>
+            
+          </div>
+        </div>
         }
         <div className='col-span-3 py-2'>
           <LeaderboardAd m/>
@@ -89,7 +109,7 @@ export default function Home() {
                     />
                 <hr />
               </div>
-            )):<>Loading...</>
+            )):shimmer(4,false,true)
           }
           <div className='col-span-3 md:col-span-1'>
             <div className='hidden md:block'><WideSkyscrapersAd/></div>
@@ -170,7 +190,10 @@ export default function Home() {
                     imageSize={250}
                     />
                 </div>
-              )):<>...</>
+              )):
+              [1,2,3,4,5,6].map((ard,index) => (
+                <NewsCardWithImageTopShimmer key={index} withContent withImage/>
+              ))
             }
           </div>
       </div>
@@ -193,7 +216,10 @@ export default function Home() {
                     imageSize={250}
                     />
                 </div>
-              )):<>...</>
+              )):
+              [1,2,3].map((ard,index) => (
+                <NewsCardWithImageTopShimmer key={index} withContent withImage/>
+              ))
             }
           </div>
       </div>
@@ -220,7 +246,13 @@ export default function Home() {
                     category={content.category}
                     />
                 </div>
-              )):<>...</>
+              )):
+              
+                  [1,2,3,4,5,6,7,8,9].map((card,index) => (
+                    <div key={index} className='col-span-4 md:col-span-2'>
+                    <ModernNewsCardShimmer withContent withImage/>
+                    </div>
+                  ))
             }
             <div className='col-span-2'>
               
