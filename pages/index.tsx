@@ -59,9 +59,9 @@ export default function Home() {
         </div>
         
         {
-          mainNews ? 
+          mainNews && mainNews.length == 1 ? 
           <div className='col-span-3 md:col-span-2'>
-          <Image src={mainNews[0].imageUrl} width={800} height={200} alt="sadsa"/>
+          <Image src={mainNews[0]?.imageUrl} width={800} height={200} alt="sadsa"/>
           {/* <p className='font-bold'>{main.title}</p> */}
           <hr/>
           <div className='py-2'>

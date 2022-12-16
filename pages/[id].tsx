@@ -66,7 +66,7 @@ function News({}: Props) {
           {
             newsData ? 
             <div className='p-5'>
-            <p className='py-4 text-xl text-green-600 font-bold'>{newsData.lang == "en" ?newsData.category.title:newsData.category.ne}</p>
+            <p className='py-4 text-xl text-green-600 font-bold'>{newsData.lang == "en" ? newsData.category.title:newsData.category.ne}</p>
             <h1 className='text-5xl font-title font-bold py-4'>{newsData.title}</h1>
             <p className='hover:underline'>By {newsData.author.fullname}</p>
             <p className='mt-2 text-gray-500'>Updated At: {time(newsData.updatedAt)}</p>
@@ -83,7 +83,7 @@ function News({}: Props) {
             {/* <QuillNoSSRWrapper defaultValue={newsData.content} readOnly className={`py-5 text-${fontSizes[fontSize]} ${font}`} /> */}
             <p className={`py-5 text-${fontSizes[fontSize]} ${font}`}>{parse(newsData.content)}</p>
             <LeaderboardAd/>
-          </div> : newsData === null ? <div className='text-3xl p-4'>News Doesn't Exist</div>:<NewsShimmer/>
+          </div> : newsData === null ? <div className='text-3xl p-4'>{"News Doesn't Exist"}</div>:<NewsShimmer/>
           }
         </div>
         {/* ----------------------- ARKO SECTION ------------------------- */}
