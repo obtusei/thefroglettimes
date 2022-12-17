@@ -3,7 +3,7 @@ const { PrismaClient }  = require("@prisma/client")
 const prisma = new PrismaClient();
 const categories = require("../libs/categories.json")
 const users = require("../libs/users.json")
-const news = require("../libs/neededNew.json")
+const news = require("../libs/nepNews.json")
 // const bcrpyt = require("bcrypt");
 
 // const users = require('./users.json')
