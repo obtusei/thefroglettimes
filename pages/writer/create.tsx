@@ -85,7 +85,7 @@ function CreateNews({}: Props) {
         
         <button className='btn' onClick={() => {
           if (session){
-            createNews({title,content,category,imageUrl:imageUrl,region,language,userEmail:session.user?.email})
+            createNews({title,content,category,imageUrl:imageUrl,region:region.toUpperCase(),language,userEmail:session.user?.email})
             alert("Article Created Successfully")
           }
         }}>Publish</button>
